@@ -7,11 +7,38 @@ const ContactSection = () => {
 
   const handleChange = (e) => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
 
-  const handleSubmit = (e) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSent(true);
-    setForm({ name: '', email: '', message: '' });
-    setTimeout(() => setSent(false), 4000);
+    setIsSubmitting(true);
+    
+    const formData = new FormData(e.target);
+    // ⚠️ TODO: Replace this with your actual Web3Forms access key
+    formData.append("access_key", "YOUR_WEB3FORMS_ACCESS_KEY_HERE");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSent(true);
+        setForm({ name: '', email: '', message: '' });
+        setTimeout(() => setSent(false), 4000);
+      } else {
+        console.error("Form error:", data);
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error("Submission failed:", error);
+      alert("Failed to send message. Please check your connection.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -153,10 +180,11 @@ const ContactSection = () => {
 
               <motion.button
                 type="submit"
-                className="btn-apple w-full justify-center py-4"
-                whileTap={{ scale: 0.98 }}
+                disabled={isSubmitting}
+                className="btn-apple w-full justify-center py-4 disabled:opacity-70"
+                whileTap={!isSubmitting ? { scale: 0.98 } : {}}
               >
-                {sent ? '✓ Message sent — I\'ll be in touch!' : 'Send message →'}
+                {isSubmitting ? 'Sending...' : (sent ? '✓ Message sent — I\'ll be in touch!' : 'Send message →')}
               </motion.button>
             </form>
           </motion.div>
