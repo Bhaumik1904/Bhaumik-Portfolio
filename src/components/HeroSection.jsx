@@ -106,6 +106,8 @@ const HeroSection = () => {
             </p>
             <a 
               href="/resume.pdf" 
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 mt-6 px-6 py-3 rounded-full text-sm font-semibold transition-all hover:scale-105" 
               style={{ background: 'var(--text)', color: 'var(--bg)' }}
             >

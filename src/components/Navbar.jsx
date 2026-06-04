@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const navItems = [
   { label: 'Work', href: '#work' },
   { label: 'About', href: '#about' },
-  { label: 'Resume', href: '#resume' },
+  { label: 'Resume', href: '/resume.pdf' },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -54,16 +54,30 @@ const Navbar = () => {
           {/* Desktop links */}
           <ul className="hidden md:flex items-center gap-1">
             {navItems.map((item) => (
-              <li key={item.href}>
-                <button
-                  onClick={() => scrollTo(item.href)}
-                  className="px-4 py-2 text-sm font-medium rounded-xl transition-all duration-200 hover:bg-black/5"
-                  style={{ color: 'var(--secondary)' }}
-                  onMouseEnter={e => e.target.style.color = 'var(--text)'}
-                  onMouseLeave={e => e.target.style.color = 'var(--secondary)'}
-                >
-                  {item.label}
-                </button>
+              <li key={item.label}>
+                {item.href.startsWith('#') ? (
+                  <button
+                    onClick={() => scrollTo(item.href)}
+                    className="px-4 py-2 text-sm font-medium rounded-xl transition-all duration-200 hover:bg-black/5"
+                    style={{ color: 'var(--secondary)' }}
+                    onMouseEnter={e => e.target.style.color = 'var(--text)'}
+                    onMouseLeave={e => e.target.style.color = 'var(--secondary)'}
+                  >
+                    {item.label}
+                  </button>
+                ) : (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 text-sm font-medium rounded-xl transition-all duration-200 hover:bg-black/5 block"
+                    style={{ color: 'var(--secondary)' }}
+                    onMouseEnter={e => e.target.style.color = 'var(--text)'}
+                    onMouseLeave={e => e.target.style.color = 'var(--secondary)'}
+                  >
+                    {item.label}
+                  </a>
+                )}
               </li>
             ))}
           </ul>
@@ -103,14 +117,26 @@ const Navbar = () => {
             >
               <ul className="py-2">
                 {navItems.map((item) => (
-                  <li key={item.href}>
-                    <button
-                      onClick={() => scrollTo(item.href)}
-                      className="w-full text-left px-6 py-3 text-sm font-medium hover:bg-black/5 transition-colors"
-                      style={{ color: 'var(--text)' }}
-                    >
-                      {item.label}
-                    </button>
+                  <li key={item.label}>
+                    {item.href.startsWith('#') ? (
+                      <button
+                        onClick={() => scrollTo(item.href)}
+                        className="w-full text-left px-6 py-3 text-sm font-medium hover:bg-black/5 transition-colors"
+                        style={{ color: 'var(--text)' }}
+                      >
+                        {item.label}
+                      </button>
+                    ) : (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full text-left px-6 py-3 text-sm font-medium hover:bg-black/5 transition-colors block"
+                        style={{ color: 'var(--text)' }}
+                      >
+                        {item.label}
+                      </a>
+                    )}
                   </li>
                 ))}
                 <li className="px-6 py-3">
