@@ -55,7 +55,7 @@ const projects = [
     color: '#FF9F0A',
     bgLight: '#FFF8EE',
     emoji: '✨',
-    github: 'https://github.com/Bhaumik1904',
+    github: 'https://github.com/Bhaumik1904/Bhaumik-Portfolio.git',
     demo: '#',
   },
 ];
