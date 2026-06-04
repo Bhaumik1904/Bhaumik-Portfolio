@@ -238,7 +238,7 @@ const Desk = () => (
 
 // ---- Main Desk Scene ----
 const DeskScene = () => (
-  <Canvas camera={{ position: [0, 3, 6], fov: 50 }} style={{ background: 'transparent' }}>
+  <Canvas dpr={[1, 1.5]} camera={{ position: [0, 3, 6], fov: 50 }} style={{ background: 'transparent' }}>
     <ambientLight intensity={0.3} />
     <directionalLight position={[5, 8, 5]} intensity={1.2} castShadow />
     <pointLight position={[0, 3, 3]} intensity={1.5} color="#7c3aed" />

@@ -213,7 +213,7 @@ const MiniatureAvatar = () => {
   }, []);
 
   return (
-    <Canvas camera={{ position: [0, 0.5, 5], fov: 42 }} style={{ background: 'transparent' }}>
+    <Canvas dpr={[1, 1.5]} camera={{ position: [0, 0.5, 5], fov: 42 }} style={{ background: 'transparent' }}>
       <ambientLight intensity={0.4} />
       <directionalLight position={[5, 5, 5]} intensity={1.5} color="#ffffff" />
       <pointLight position={[-3, 2, 2]} intensity={1.5} color="#7c3aed" />
