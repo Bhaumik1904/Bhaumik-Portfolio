@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg: #F5F5F7;
+    --card: #FFFFFF;
+    --text: #1D1D1F;
+    --secondary: #6E6E73;
+    --accent: #0071E3;
+    --border: rgba(0, 0, 0, 0.08);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.5;
+  }
+
+  ::selection {
+    background: rgba(0, 113, 227, 0.15);
+    color: var(--accent);
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.25);
+  }
+}
+
+@layer components {
+  /* Apple-style button */
+  .btn-apple {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold transition-all duration-200;
+    background: var(--accent);
+    color: white;
+    letter-spacing: -0.01em;
+  }
+  .btn-apple:hover {
+    background: #0077ED;
+    transform: scale(1.02);
+    box-shadow: 0 4px 16px rgba(0, 113, 227, 0.3);
+  }
+  .btn-apple:active {
+    transform: scale(0.98);
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold transition-all duration-200;
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+  .btn-ghost:hover {
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  /* Section wrapper */
+  .section-container {
+    @apply max-w-6xl mx-auto px-6 lg:px-12;
+  }
+
+  /* Section label */
+  .section-label {
+    @apply text-xs font-semibold uppercase tracking-widest;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+  }
+
+  /* Apple card */
+  .apple-card {
+    background: var(--card);
+    border-radius: 20px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+  }
+
+  /* Skill tag */
+  .skill-tag {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium;
+    background: rgba(0, 0, 0, 0.04);
+    color: var(--secondary);
+    border: 1px solid var(--border);
+    transition: all 0.2s ease;
+  }
+  .skill-tag:hover {
+    background: rgba(0, 113, 227, 0.08);
+    color: var(--accent);
+    border-color: rgba(0, 113, 227, 0.2);
+  }
+
+  /* Divider */
+  .divider {
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Large heading style */
+  .display-heading {
+    @apply font-black leading-none tracking-tighter;
+    color: var(--text);
+    letter-spacing: -0.04em;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Smooth hover for links */
+  .hover-accent {
+    transition: color 0.2s ease;
+  }
+  .hover-accent:hover {
+    color: var(--accent);
+  }
+}
+
+/* Orb drag cursor */
+.orb-dragging {
+  cursor: grabbing !important;
+}
+
+/* Avatar glow effect */
+.avatar-glow {
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.12));
+}
+
+/* Project image overlay */
+.project-image-overlay {
+  background: linear-gradient(to top, rgba(255,255,255,0.9) 0%, transparent 40%);
+}
+
+/* Timeline connector */
+.timeline-line {
+  background: linear-gradient(to bottom, transparent, var(--border), transparent);
+}
