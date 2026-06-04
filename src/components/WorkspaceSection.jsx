@@ -67,7 +67,10 @@ const Notebook = ({ position, onHoverChange }) => {
       rotation={[0, 0.4, 0]}
       onPointerOver={() => { setHovered(true); onHoverChange?.('notebook'); }}
       onPointerOut={() => { setHovered(false); onHoverChange?.(null); }}
-      onClick={() => scrollTo('#resume')}
+      onClick={(e) => {
+        e.stopPropagation();
+        window.open('/resume.pdf', '_blank');
+      }}
     >
       <mesh>
         <boxGeometry args={[0.6, 0.04, 0.85]} />
@@ -266,7 +269,13 @@ const WorkspaceSection = () => {
           {Object.entries(HINTS).map(([key, { label, hint }]) => (
             <button
               key={key}
-              onClick={() => scrollTo(key === 'laptop' ? '#work' : key === 'notebook' ? '#resume' : key === 'mug' ? '#about' : '#contact')}
+              onClick={() => {
+                if (key === 'notebook') {
+                  window.open('/resume.pdf', '_blank');
+                } else {
+                  scrollTo(key === 'laptop' ? '#work' : key === 'mug' ? '#about' : '#contact');
+                }
+              }}
               className="apple-card p-4 text-left hover:border-blue-200 transition-all duration-200 group"
               style={{ border: '1px solid rgba(0,0,0,0.06)' }}
             >

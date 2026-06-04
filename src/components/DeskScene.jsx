@@ -81,7 +81,10 @@ const Notebook = ({ position }) => {
       rotation={[0, 0.3, 0]}
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
-      onClick={() => scrollTo('resume')}
+      onClick={(e) => {
+        e.stopPropagation();
+        window.open('/resume.pdf', '_blank');
+      }}
     >
       {/* Book body */}
       <mesh>
