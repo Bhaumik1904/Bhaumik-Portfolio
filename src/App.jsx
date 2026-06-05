@@ -8,7 +8,6 @@ import WorkspaceSection from './components/WorkspaceSection';
 import AboutSection from './components/AboutSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
-import CustomCursor from './components/CustomCursor';
 import NoiseOverlay from './components/NoiseOverlay';
 
 function App() {
@@ -44,7 +43,6 @@ function App() {
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       <NoiseOverlay />
-      <CustomCursor />
       <Navbar />
       <main>
         <HeroSection />

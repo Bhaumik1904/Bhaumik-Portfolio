@@ -33,6 +33,8 @@
     color: var(--text);
     overflow-x: hidden;
     line-height: 1.5;
+    /* Prevent text selection on tap for cleaner mobile UX */
+    -webkit-tap-highlight-color: transparent;
   }
 
   ::selection {
@@ -162,4 +164,14 @@
 /* Timeline connector */
 .timeline-line {
   background: linear-gradient(to bottom, transparent, var(--border), transparent);
+}
+
+/* Hero avatar float — uses CSS animation for GPU compositing (no JS per-frame cost) */
+@keyframes heroFloat {
+  0%, 100% { transform: translateY(-10px); }
+  50% { transform: translateY(0px); }
+}
+.hero-float {
+  animation: heroFloat 6s ease-in-out infinite;
+  will-change: transform;
 }
