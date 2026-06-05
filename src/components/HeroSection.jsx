@@ -29,7 +29,7 @@ const HeroSection = () => {
     >
       {/* Subtle Professional Colorful Background - Overlays everything to blend white edges */}
       <div 
-        className="absolute inset-0 pointer-events-none z-30"
+        className="absolute inset-0 pointer-events-none z-30 hidden md:block"
         style={{
           background: `
             radial-gradient(circle at 20% 40%, rgba(0, 113, 227, 0.08), transparent 50%),
@@ -77,21 +77,21 @@ const HeroSection = () => {
         </motion.h1>
       </motion.div>
 
-      {/* Foreground Name - Split left and right */}
+      {/* Foreground Name - Stacked on mobile, split on desktop */}
       <div 
-        className="absolute inset-0 flex items-center justify-between px-6 md:px-16 lg:px-24 pointer-events-none z-10"
+        className="absolute inset-0 flex flex-col md:flex-row items-center justify-start md:justify-between px-6 md:px-16 lg:px-24 pointer-events-none z-10 pt-[12vh] md:pt-0"
         style={{ opacity }}
       >
         <motion.div
           initial={{ opacity: 0, x: -60 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.2, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col items-start"
+          className="flex flex-col items-center md:items-start text-center md:text-left mb-4 md:mb-0 w-full md:w-auto"
         >
-          <span className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase mb-3" style={{ color: 'var(--accent)' }}>
+          <span className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase mb-1 md:mb-3" style={{ color: 'var(--accent)' }}>
             Hello, I'm
           </span>
-          <h2 className="text-5xl md:text-7xl lg:text-[7rem] font-black tracking-tighter" style={{ color: 'var(--text)', lineHeight: 0.9 }}>
+          <h2 className="text-6xl md:text-7xl lg:text-[7rem] font-black tracking-tighter" style={{ color: 'var(--text)', lineHeight: 0.9 }}>
             Bhaumik
           </h2>
           
@@ -99,7 +99,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.4, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-8 max-w-xs md:max-w-sm"
+            className="mt-6 md:mt-8 max-w-[280px] md:max-w-sm hidden md:block"
           >
             <p className="text-sm md:text-base font-medium leading-relaxed" style={{ color: 'var(--secondary)' }}>
               Building thoughtful digital products and AI-powered experiences.
@@ -120,22 +120,43 @@ const HeroSection = () => {
           initial={{ opacity: 0, x: 60 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.2, delay: 1.0, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col items-end text-right"
+          className="flex flex-col items-center md:items-end text-center md:text-right w-full md:w-auto mt-2 md:mt-0"
         >
-          <span className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase mb-3" style={{ color: 'var(--secondary)' }}>
+          <span className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase mb-1 md:mb-3 hidden md:block" style={{ color: 'var(--secondary)' }}>
             Full Stack Developer
           </span>
-          <h2 className="text-5xl md:text-7xl lg:text-[7rem] font-black tracking-tighter" style={{ color: 'var(--text)', lineHeight: 0.9 }}>
+          <h2 className="text-6xl md:text-7xl lg:text-[7rem] font-black tracking-tighter" style={{ color: 'var(--text)', lineHeight: 0.9 }}>
             Hinunia
           </h2>
+          <span className="text-xs font-bold tracking-[0.2em] uppercase mt-2 md:hidden block" style={{ color: 'var(--secondary)' }}>
+            Full Stack Developer
+          </span>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 1.4, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-4 max-w-[280px] md:hidden block"
+          >
+            <p className="text-sm font-medium leading-relaxed" style={{ color: 'var(--secondary)' }}>
+              Building thoughtful digital products and AI-powered experiences.
+            </p>
+            <a 
+              href="/resume.pdf" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 mt-4 px-6 py-3 rounded-full text-sm font-semibold transition-all pointer-events-auto shadow-sm" 
+              style={{ background: 'var(--text)', color: 'var(--bg)' }}
+            >
+              Resume ↗
+            </a>
+          </motion.div>
         </motion.div>
       </div>
 
-      {/* 3D Avatar Container - Placed at z-10 so the white background blends with the pure white page */}
-      {/* Adding mixBlendMode: 'multiply' to the parent fixes Stacking Context issues with the background text! */}
+      {/* 3D Avatar Container */}
       <motion.div
-        style={{ y: yAvatar, opacity, mixBlendMode: 'multiply' }}
-        className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-center pointer-events-none"
+        style={{ y: yAvatar, opacity }}
+        className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-center pointer-events-none md:mix-blend-multiply"
       >
         <motion.div
           initial={{ opacity: 0, y: 150 }}
@@ -149,8 +170,7 @@ const HeroSection = () => {
             x: { type: 'spring', stiffness: 50, damping: 20 },
             y: { type: 'spring', stiffness: 50, damping: 20 }
           }}
-          className="relative flex items-start justify-center w-full h-[75vh] md:h-[85vh] overflow-hidden"
-          style={{ mixBlendMode: 'multiply' }}
+          className="relative flex items-start justify-center w-full h-[55vh] md:h-[85vh] overflow-hidden md:mix-blend-multiply"
         >
           <motion.img
             src="/bhaumik.png"
@@ -163,9 +183,9 @@ const HeroSection = () => {
               width: 'auto',
               objectFit: 'cover',
               objectPosition: 'top center', // Pin head to the top, legs overflow bottom
-              mixBlendMode: 'multiply',
               filter: 'brightness(1.08) contrast(1.05)',
             }}
+            className="md:mix-blend-multiply mix-blend-normal"
           />
         </motion.div>
       </motion.div>

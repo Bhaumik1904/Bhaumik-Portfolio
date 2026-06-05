@@ -222,7 +222,7 @@ const WorkspaceSection = () => {
           className="apple-card overflow-hidden relative"
           style={{ height: '500px' }}
         >
-          <Canvas dpr={[1, 1.5]} camera={{ position: [0, 3.5, 7], fov: 42 }} style={{ background: 'white' }}>
+          <Canvas dpr={window.innerWidth < 768 ? 1 : [1, 1.5]} camera={{ position: [0, 3.5, 7], fov: 42 }} style={{ background: 'white' }}>
             <ambientLight intensity={0.9} />
             <directionalLight position={[6, 8, 4]} intensity={1.2} castShadow />
             <pointLight position={[-4, 3, 2]} intensity={0.5} color="#ffffff" />
