@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const CATEGORIES = [
@@ -97,11 +97,16 @@ const DraggableSkill = ({ skill, index, total, constraintsRef }) => {
 const SkillsSection = () => {
   const [activeCategory, setActiveCategory] = useState(CATEGORIES[0]);
   const constraintsRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768 || 'ontouchstart' in window);
+  }, []);
 
   return (
     <section className="relative w-full min-h-screen bg-white flex items-center overflow-hidden py-24 md:py-0">
-      {/* Background: Cinematic Marquee */}
-      <MarqueeBg />
+      {/* Background: Cinematic Marquee — desktop only */}
+      {!isMobile && <MarqueeBg />}
       
       {/* Gradients to fade out marquee on edges */}
       <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-white to-transparent z-0 pointer-events-none" />
@@ -147,7 +152,26 @@ const SkillsSection = () => {
           </div>
         </div>
 
-        {/* Right Side: Interactive Honeycomb / Carousel (Options 1 & 2) */}
+        {/* Right Side: On desktop - Interactive Honeycomb. On mobile - Static grid */}
+        {isMobile ? (
+          <div className="w-full md:w-1/2 mt-8 z-30">
+            <div className="flex flex-wrap gap-2 justify-center">
+              {activeCategory.skills.map((skill) => (
+                <div
+                  key={skill}
+                  className="px-4 py-2 rounded-2xl border text-sm font-bold text-gray-800"
+                  style={{
+                    background: 'rgba(255,255,255,0.9)',
+                    borderColor: 'rgba(0,0,0,0.1)',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+                  }}
+                >
+                  {skill}
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
         <div 
            ref={constraintsRef} 
            className="w-full md:w-1/2 h-[50vh] md:h-[80vh] relative mt-12 md:mt-0 z-30"
@@ -169,6 +193,7 @@ const SkillsSection = () => {
             </motion.div>
           </AnimatePresence>
         </div>
+        )}
 
       </div>
     </section>

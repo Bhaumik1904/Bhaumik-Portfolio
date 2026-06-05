@@ -9,8 +9,13 @@ const HeroSection = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    const mobile = window.innerWidth < 768 || 'ontouchstart' in window;
+    setIsMobile(mobile);
+    if (mobile) return; // No mouse tracking on touch devices
+
     const handleMouseMove = (e) => {
       setMousePosition({
         x: (e.clientX / window.innerWidth - 0.5) * 30,
@@ -41,9 +46,9 @@ const HeroSection = () => {
         }}
       />
 
-      {/* Massive Background Text - Moved to z-0 behind the avatar */}
+      {/* Massive Background Text - Desktop only to reduce mobile paint cost */}
       <motion.div 
-        className="absolute w-full flex flex-col items-center justify-center pointer-events-none select-none z-0"
+        className="absolute w-full flex flex-col items-center justify-center pointer-events-none select-none z-0 hidden md:flex"
         style={{ y: yText, opacity }}
       >
         <motion.h1 

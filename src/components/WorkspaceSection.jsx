@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
 import { Float, Environment, ContactShadows, useCursor } from '@react-three/drei';
@@ -185,6 +185,11 @@ const HINTS = {
 
 const WorkspaceSection = () => {
   const [hovered, setHovered] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768 || 'ontouchstart' in window);
+  }, []);
 
   return (
     <section
@@ -213,16 +218,39 @@ const WorkspaceSection = () => {
           </p>
         </motion.div>
 
-        {/* Canvas */}
+        {/* Canvas — 3D on desktop, static cards on mobile */}
         <motion.div
           initial={{ opacity: 0, scale: 0.97 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
           className="apple-card overflow-hidden relative"
-          style={{ height: '500px' }}
+          style={{ minHeight: isMobile ? 'auto' : '500px' }}
         >
-          <Canvas dpr={window.innerWidth < 768 ? 1 : [1, 1.5]} camera={{ position: [0, 3.5, 7], fov: 42 }} style={{ background: 'white' }}>
+          {isMobile ? (
+            /* Static mobile-friendly desk items */
+            <div className="p-6 grid grid-cols-2 gap-4">
+              {Object.entries(HINTS).map(([key, { label, hint }]) => (
+                <button
+                  key={key}
+                  onClick={() => {
+                    if (key === 'notebook') window.open('/resume.pdf', '_blank');
+                    else scrollTo(key === 'laptop' ? '#work' : key === 'mug' ? '#about' : '#contact');
+                  }}
+                  className="flex flex-col items-center gap-3 p-5 rounded-2xl text-center active:scale-95 transition-transform"
+                  style={{ background: 'rgba(0,0,0,0.02)', border: '1px solid rgba(0,0,0,0.06)' }}
+                >
+                  <span className="text-4xl">{label.split(' ')[0]}</span>
+                  <div>
+                    <p className="text-sm font-semibold" style={{ color: 'var(--text)' }}>{label.split(' ').slice(1).join(' ')}</p>
+                    <p className="text-xs mt-0.5" style={{ color: 'var(--secondary)' }}>{hint}</p>
+                  </div>
+                </button>
+              ))}
+            </div>
+          ) : (
+          <>
+          <Canvas dpr={[1, 1.5]} camera={{ position: [0, 3.5, 7], fov: 42 }} style={{ background: 'white', height: '500px' }}>
             <ambientLight intensity={0.9} />
             <directionalLight position={[6, 8, 4]} intensity={1.2} castShadow />
             <pointLight position={[-4, 3, 2]} intensity={0.5} color="#ffffff" />
@@ -262,6 +290,8 @@ const WorkspaceSection = () => {
               </div>
             )}
           </div>
+          </>
+          )}
         </motion.div>
 
         {/* Object legend below */}

@@ -13,6 +13,10 @@ import NoiseOverlay from './components/NoiseOverlay';
 
 function App() {
   useEffect(() => {
+    // Skip Lenis on mobile/touch devices — native scroll is much faster
+    const isMobile = window.innerWidth < 768 || ('ontouchstart' in window);
+    if (isMobile) return;
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
