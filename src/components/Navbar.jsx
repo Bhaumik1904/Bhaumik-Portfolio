@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from '../context/ThemeContext';
 
 const navItems = [
   { label: 'Work', href: '#work' },
@@ -11,6 +12,7 @@ const navItems = [
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 100);
@@ -82,8 +84,16 @@ const Navbar = () => {
             ))}
           </ul>
 
-          {/* CTA */}
+          {/* Theme toggle + CTA — desktop */}
           <div className="hidden md:flex items-center gap-3">
+            <button
+              onClick={toggleTheme}
+              className="w-9 h-9 rounded-xl flex items-center justify-center text-base transition-all hover:scale-110 active:scale-95"
+              style={{ background: 'rgba(0,0,0,0.05)', color: 'var(--text)' }}
+              aria-label="Toggle dark mode"
+            >
+              {theme === 'dark' ? '☀️' : '🌙'}
+            </button>
             <button
               onClick={() => scrollTo('#contact')}
               className="btn-apple text-sm"
@@ -92,18 +102,28 @@ const Navbar = () => {
             </button>
           </div>
 
-          {/* Mobile hamburger */}
-          <button
-            className="md:hidden p-2 rounded-xl hover:bg-black/5 transition-colors"
-            onClick={() => setMobileOpen(o => !o)}
-            aria-label="Toggle menu"
-          >
+          {/* Mobile: theme toggle + hamburger */}
+          <div className="md:hidden flex items-center gap-2">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-xl transition-colors"
+              style={{ color: 'var(--text)' }}
+              aria-label="Toggle dark mode"
+            >
+              {theme === 'dark' ? '☀️' : '🌙'}
+            </button>
+            <button
+              className="p-2 rounded-xl hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+              onClick={() => setMobileOpen(o => !o)}
+              aria-label="Toggle menu"
+            >
             <div className="w-5 h-4 flex flex-col justify-between">
               <span className={`block h-0.5 bg-current transition-all duration-300 origin-center ${mobileOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
               <span className={`block h-0.5 bg-current transition-all duration-300 ${mobileOpen ? 'opacity-0 scale-x-0' : ''}`} />
               <span className={`block h-0.5 bg-current transition-all duration-300 origin-center ${mobileOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
             </div>
-          </button>
+            </button>
+          </div>
         </nav>
 
         {/* Mobile menu */}

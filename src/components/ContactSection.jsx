@@ -42,7 +42,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-32" style={{ background: 'white' }}>
+    <section id="contact" className="py-32" style={{ background: 'var(--bg)' }}>
       <div className="section-container">
         <div className="grid md:grid-cols-2 gap-20 items-start">
 
@@ -80,13 +80,13 @@ const ContactSection = () => {
                   target="_blank"
                   rel="noreferrer"
                   className="flex items-center gap-4 p-4 rounded-2xl transition-all duration-200 group"
-                  style={{ border: '1px solid rgba(0,0,0,0.07)', background: 'var(--bg)' }}
+                  style={{ border: '1px solid var(--border)', background: 'var(--bg)' }}
                   onMouseEnter={e => {
                     e.currentTarget.style.borderColor = 'rgba(0,113,227,0.25)';
                     e.currentTarget.style.background = 'rgba(0,113,227,0.04)';
                   }}
                   onMouseLeave={e => {
-                    e.currentTarget.style.borderColor = 'rgba(0,0,0,0.07)';
+                    e.currentTarget.style.borderColor = 'var(--border)';
                     e.currentTarget.style.background = 'var(--bg)';
                   }}
                 >
@@ -130,7 +130,7 @@ const ContactSection = () => {
                     className="w-full px-4 py-3.5 rounded-xl text-sm outline-none transition-all duration-200"
                     style={{
                       background: 'var(--bg)',
-                      border: '1px solid rgba(0,0,0,0.08)',
+                      border: '1px solid var(--border)',
                       color: 'var(--text)',
                       fontFamily: 'inherit',
                     }}
@@ -139,7 +139,7 @@ const ContactSection = () => {
                       e.target.style.boxShadow = '0 0 0 3px rgba(0,113,227,0.08)';
                     }}
                     onBlur={e => {
-                      e.target.style.borderColor = 'rgba(0,0,0,0.08)';
+                      e.target.style.borderColor = 'var(--border)';
                       e.target.style.boxShadow = 'none';
                     }}
                   />
@@ -163,7 +163,7 @@ const ContactSection = () => {
                   className="w-full px-4 py-3.5 rounded-xl text-sm outline-none transition-all duration-200 resize-none"
                   style={{
                     background: 'var(--bg)',
-                    border: '1px solid rgba(0,0,0,0.08)',
+                    border: '1px solid var(--border)',
                     color: 'var(--text)',
                     fontFamily: 'inherit',
                   }}
@@ -172,7 +172,7 @@ const ContactSection = () => {
                     e.target.style.boxShadow = '0 0 0 3px rgba(0,113,227,0.08)';
                   }}
                   onBlur={e => {
-                    e.target.style.borderColor = 'rgba(0,0,0,0.08)';
+                    e.target.style.borderColor = 'var(--border)';
                     e.target.style.boxShadow = 'none';
                   }}
                 />

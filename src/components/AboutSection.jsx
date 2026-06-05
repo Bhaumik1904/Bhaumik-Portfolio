@@ -43,7 +43,7 @@ const AboutSection = () => (
   <section
     id="about"
     className="py-32"
-    style={{ background: 'white' }}
+    style={{ background: 'var(--bg)' }}
   >
     <div className="section-container">
       <div className="grid md:grid-cols-2 gap-20 items-start">
@@ -87,7 +87,7 @@ const AboutSection = () => (
               <div
                 key={label}
                 className="p-4 rounded-2xl"
-                style={{ background: 'var(--bg)', border: '1px solid rgba(0,0,0,0.06)' }}
+                style={{ background: 'var(--bg)', border: '1px solid var(--border)' }}
               >
                 <p className="text-xs font-medium mb-1" style={{ color: 'var(--secondary)' }}>{label}</p>
                 <p className="text-sm font-semibold" style={{ color: 'var(--text)' }}>{value}</p>
@@ -106,8 +106,8 @@ const AboutSection = () => (
           <div className="relative">
             {/* Vertical line */}
             <div
-              className="absolute left-5 top-0 bottom-0 w-px"
-              style={{ background: 'linear-gradient(to bottom, transparent, rgba(0,0,0,0.08) 20%, rgba(0,0,0,0.08) 80%, transparent)' }}
+              className="absolute left-5 top-0 bottom-0 w-px transition-colors"
+              style={{ background: 'linear-gradient(to bottom, transparent, var(--border) 20%, var(--border) 80%, transparent)' }}
             />
 
             <div className="space-y-8">

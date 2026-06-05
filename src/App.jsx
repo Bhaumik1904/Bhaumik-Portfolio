@@ -1,5 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import Lenis from 'lenis';
+import { ThemeProvider } from './context/ThemeContext';
+import SplashScreen from './components/SplashScreen';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import SkillsSection from './components/SkillsSection';
@@ -10,8 +13,12 @@ import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import NoiseOverlay from './components/NoiseOverlay';
 
-function App() {
+function AppContent() {
+  const [splashDone, setSplashDone] = useState(false);
+
   useEffect(() => {
+    if (!splashDone) return;
+
     // Skip Lenis on mobile/touch devices — native scroll is much faster
     const isMobile = window.innerWidth < 768 || ('ontouchstart' in window);
     if (isMobile) return;
@@ -38,10 +45,18 @@ function App() {
     return () => {
       lenis.destroy();
     };
-  }, []);
+  }, [splashDone]);
 
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
+      {/* Splash screen — AnimatePresence handles the exit animation */}
+      <AnimatePresence>
+        {!splashDone && (
+          <SplashScreen onDone={() => setSplashDone(true)} />
+        )}
+      </AnimatePresence>
+
+      {/* Main site content — renders underneath but shown after splash exits */}
       <NoiseOverlay />
       <Navbar />
       <main>
@@ -54,6 +69,14 @@ function App() {
       </main>
       <Footer />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
   );
 }
 

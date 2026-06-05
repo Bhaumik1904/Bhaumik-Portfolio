@@ -238,7 +238,7 @@ const WorkspaceSection = () => {
                     else scrollTo(key === 'laptop' ? '#work' : key === 'mug' ? '#about' : '#contact');
                   }}
                   className="flex flex-col items-center gap-3 p-5 rounded-2xl text-center active:scale-95 transition-transform"
-                  style={{ background: 'rgba(0,0,0,0.02)', border: '1px solid rgba(0,0,0,0.06)' }}
+                  style={{ background: 'var(--bg)', border: '1px solid var(--border)' }}
                 >
                   <span className="text-4xl">{label.split(' ')[0]}</span>
                   <div>
@@ -250,7 +250,7 @@ const WorkspaceSection = () => {
             </div>
           ) : (
           <>
-          <Canvas dpr={[1, 1.5]} camera={{ position: [0, 3.5, 7], fov: 42 }} style={{ background: 'white', height: '500px' }}>
+          <Canvas dpr={[1, 1.5]} camera={{ position: [0, 3.5, 7], fov: 42 }} style={{ background: 'var(--card)', height: '500px' }}>
             <ambientLight intensity={0.9} />
             <directionalLight position={[6, 8, 4]} intensity={1.2} castShadow />
             <pointLight position={[-4, 3, 2]} intensity={0.5} color="#ffffff" />
@@ -278,10 +278,10 @@ const WorkspaceSection = () => {
               <div
                 className="px-5 py-3 rounded-2xl text-sm font-medium flex items-center gap-2"
                 style={{
-                  background: 'rgba(255,255,255,0.95)',
+                  background: 'var(--card)',
                   backdropFilter: 'blur(16px)',
-                  boxShadow: '0 4px 24px rgba(0,0,0,0.1)',
-                  border: '1px solid rgba(0,0,0,0.07)',
+                  boxShadow: 'var(--shadow-md)',
+                  border: '1px solid var(--border)',
                 }}
               >
                 <span>{HINTS[hovered]?.label}</span>
@@ -307,7 +307,7 @@ const WorkspaceSection = () => {
                 }
               }}
               className="apple-card p-4 text-left hover:border-blue-200 transition-all duration-200 group"
-              style={{ border: '1px solid rgba(0,0,0,0.06)' }}
+              style={{ border: '1px solid var(--border)' }}
             >
               <span className="text-xl block mb-2">{label.split(' ')[0]}</span>
               <p className="text-xs font-medium" style={{ color: 'var(--text)' }}>{label.split(' ').slice(1).join(' ')}</p>

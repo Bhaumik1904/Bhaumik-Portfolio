@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useTheme } from '../context/ThemeContext';
+import ProjectModal from './ProjectModal';
 
 const projects = [
   {
@@ -70,25 +72,27 @@ const cardVariants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] } },
 };
 
-const ProjectCard = ({ project, index }) => {
+const ProjectCard = ({ project, index, onSelect }) => {
   const isEven = index % 2 === 0;
+  const { theme } = useTheme();
 
   return (
     <motion.article
       variants={cardVariants}
-      className="apple-card overflow-hidden"
-      whileHover={{ y: -4, boxShadow: '0 12px 48px rgba(0,0,0,0.1)' }}
+      className="apple-card overflow-hidden cursor-pointer"
+      whileHover={{ y: -4, boxShadow: 'var(--shadow-md)' }}
       transition={{ duration: 0.3, ease: 'easeOut' }}
+      onClick={() => onSelect(project)}
     >
       {/* Project header band */}
       <div
         className="px-8 py-6 flex items-center justify-between"
-        style={{ background: project.bgLight, borderBottom: '1px solid rgba(0,0,0,0.05)' }}
+        style={{ background: theme === 'dark' ? `${project.color}15` : project.bgLight, borderBottom: '1px solid var(--border)' }}
       >
         <div className="flex items-center gap-4">
           <div
             className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl"
-            style={{ background: 'white', boxShadow: `0 4px 16px ${project.color}22` }}
+            style={{ background: theme === 'dark' ? 'rgba(255,255,255,0.05)' : 'white', boxShadow: `0 4px 16px ${project.color}22` }}
           >
             {project.emoji}
           </div>
@@ -112,7 +116,7 @@ const ProjectCard = ({ project, index }) => {
       {/* Project body */}
       <div className={`grid ${isEven ? 'md:grid-cols-5' : 'md:grid-cols-5'} gap-0`}>
         {/* Description */}
-        <div className="md:col-span-3 p-8 border-r" style={{ borderColor: 'rgba(0,0,0,0.05)' }}>
+        <div className="md:col-span-3 p-8 border-r" style={{ borderColor: 'var(--border)' }}>
           <p className="text-base leading-relaxed mb-6" style={{ color: 'var(--secondary)' }}>
             {project.description}
           </p>
@@ -132,7 +136,7 @@ const ProjectCard = ({ project, index }) => {
         </div>
 
         {/* Tech + Links */}
-        <div className="md:col-span-2 p-8 flex flex-col justify-between" style={{ background: 'rgba(0,0,0,0.01)' }}>
+        <div className="md:col-span-2 p-8 flex flex-col justify-between" style={{ background: 'var(--bg)' }}>
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--secondary)' }}>
               Technologies
@@ -168,9 +172,14 @@ const ProjectCard = ({ project, index }) => {
   );
 };
 
-const ProjectsSection = () => (
-  <section id="work" className="py-32" style={{ background: 'var(--bg)' }}>
-    <div className="section-container">
+const ProjectsSection = () => {
+  const [selectedProject, setSelectedProject] = useState(null);
+
+  return (
+    <section id="work" className="py-32" style={{ background: 'var(--bg)' }}>
+      <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+      
+      <div className="section-container">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -197,7 +206,7 @@ const ProjectsSection = () => (
         viewport={{ once: true, margin: '-80px' }}
       >
         {projects.map((project, index) => (
-          <ProjectCard key={project.id} project={project} index={index} />
+          <ProjectCard key={project.id} project={project} index={index} onSelect={setSelectedProject} />
         ))}
       </motion.div>
 
@@ -219,8 +228,9 @@ const ProjectsSection = () => (
           More projects on GitHub →
         </a>
       </motion.div>
-    </div>
-  </section>
-);
+      </div>
+    </section>
+  );
+};
 
 export default ProjectsSection;

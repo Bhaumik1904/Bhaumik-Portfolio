@@ -15,6 +15,19 @@
     --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.1);
   }
 
+  /* Dark mode variable overrides */
+  html.dark {
+    --bg: #0d0d14;
+    --card: #16161f;
+    --text: #F5F5F7;
+    --secondary: #8E8E99;
+    --accent: #3B9EFF;
+    --border: rgba(255, 255, 255, 0.09);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
+    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.55);
+  }
+
   * {
     box-sizing: border-box;
     margin: 0;

@@ -37,7 +37,7 @@ const MarqueeRow = ({ items, direction }) => {
           <span 
             key={i} 
             className="text-[8rem] md:text-[12rem] font-black uppercase text-transparent tracking-tighter" 
-            style={{ WebkitTextStroke: '3px rgba(0,0,0,0.04)' }}
+            style={{ WebkitTextStroke: '3px var(--border)' }}
           >
             {item}
           </span>
@@ -79,17 +79,14 @@ const DraggableSkill = ({ skill, index, total, constraintsRef }) => {
       animate={{ opacity: 1, scale: 1, x: initialX, y: initialY, rotate: 0 }}
       exit={{ opacity: 0, scale: 0, x: 0, y: 0, rotate: 20 }}
       transition={{ type: 'spring', stiffness: 200, damping: 20, delay: index * 0.04 }}
-      className="absolute top-1/2 left-1/2 -mt-12 -ml-16 w-32 h-24 rounded-3xl border flex items-center justify-center cursor-grab active:cursor-grabbing"
+      className="absolute top-1/2 left-1/2 -mt-12 -ml-16 w-32 h-24 rounded-3xl border flex items-center justify-center cursor-grab active:cursor-grabbing bg-white/65 dark:bg-white/5 backdrop-blur-3xl border-white/80 dark:border-white/10"
       style={{
-        background: 'rgba(255, 255, 255, 0.65)',
-        backdropFilter: 'blur(30px)',
-        borderColor: 'rgba(255,255,255,0.8)',
-        boxShadow: '0 20px 40px rgba(0,0,0,0.08), inset 0 2px 15px rgba(255,255,255,1)',
+        boxShadow: '0 20px 40px var(--shadow-md), inset 0 2px 15px rgba(255,255,255,0.1)',
       }}
       whileHover={{ scale: 1.15, zIndex: 50 }}
-      whileDrag={{ scale: 1.25, zIndex: 100, boxShadow: '0 30px 60px rgba(0,0,0,0.15)' }}
+      whileDrag={{ scale: 1.25, zIndex: 100, boxShadow: '0 30px 60px var(--shadow-lg)' }}
     >
-      <span className="font-bold text-gray-800 text-lg tracking-tight">{skill}</span>
+      <span className="font-bold text-[var(--text)] text-lg tracking-tight">{skill}</span>
     </motion.div>
   );
 };
@@ -104,13 +101,13 @@ const SkillsSection = () => {
   }, []);
 
   return (
-    <section className="relative w-full min-h-screen bg-white flex items-center overflow-hidden py-24 md:py-0">
+    <section className="relative w-full min-h-screen flex items-center overflow-hidden py-24 md:py-0" style={{ background: 'var(--bg)' }}>
       {/* Background: Cinematic Marquee — desktop only */}
       {!isMobile && <MarqueeBg />}
       
       {/* Gradients to fade out marquee on edges */}
-      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-white to-transparent z-0 pointer-events-none" />
-      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent z-0 pointer-events-none" />
+      <div className="absolute inset-x-0 top-0 h-32 z-0 pointer-events-none" style={{ background: 'linear-gradient(to bottom, var(--bg), transparent)' }} />
+      <div className="absolute inset-x-0 bottom-0 h-32 z-0 pointer-events-none" style={{ background: 'linear-gradient(to top, var(--bg), transparent)' }} />
 
       <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center h-full px-6">
         
@@ -136,7 +133,7 @@ const SkillsSection = () => {
                   className="text-5xl md:text-8xl font-black tracking-tighter transition-all duration-500"
                   style={{
                     color: activeCategory.id === cat.id ? 'var(--text)' : 'transparent',
-                    WebkitTextStroke: activeCategory.id === cat.id ? 'none' : '2px rgba(0,0,0,0.15)',
+                    WebkitTextStroke: activeCategory.id === cat.id ? 'none' : '2px var(--border)',
                     transform: activeCategory.id === cat.id ? 'translateX(20px)' : 'translateX(0px)',
                   }}
                 >
@@ -159,11 +156,10 @@ const SkillsSection = () => {
               {activeCategory.skills.map((skill) => (
                 <div
                   key={skill}
-                  className="px-4 py-2 rounded-2xl border text-sm font-bold text-gray-800"
+                  className="px-4 py-2 rounded-2xl border text-sm font-bold bg-white/90 dark:bg-white/10 text-gray-800 dark:text-gray-100"
                   style={{
-                    background: 'rgba(255,255,255,0.9)',
-                    borderColor: 'rgba(0,0,0,0.1)',
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+                    borderColor: 'var(--border)',
+                    boxShadow: 'var(--shadow-sm)',
                   }}
                 >
                   {skill}

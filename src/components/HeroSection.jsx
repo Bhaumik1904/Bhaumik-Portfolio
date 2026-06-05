@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
+import { useTheme } from '../context/ThemeContext';
 
 const HeroSection = () => {
   const ref = useRef(null);
@@ -15,6 +16,7 @@ const HeroSection = () => {
   const mouseY = useSpring(rawY, { stiffness: 50, damping: 20 });
 
   const [isMobile, setIsMobile] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const mobile = window.innerWidth < 768 || 'ontouchstart' in window;
@@ -32,8 +34,8 @@ const HeroSection = () => {
   return (
     <section
       ref={ref}
-      className="relative flex items-center justify-center overflow-hidden"
-      style={{ height: '100vh', backgroundColor: '#FFFFFF' }}
+      className="relative flex items-center justify-center overflow-hidden transition-colors"
+      style={{ height: '100vh', backgroundColor: 'var(--bg)' }}
     >
       {/* Color wash — desktop only (has blur filter) */}
       <div
@@ -170,11 +172,11 @@ const HeroSection = () => {
       </div>
 
       {/* ── Avatar ── */}
-      {/* Outer: scroll parallax + fade + mix-blend-mode on the SAME element as the transform */}
+      {/* Outer: scroll parallax + fade + conditional mix-blend-mode on the SAME element as the transform */}
       {/* IMPORTANT: mix-blend-mode must be on the outermost element with the transform. */}
       {/* Children must NOT have mix-blend-mode — it traps blending inside stacking contexts */}
       <motion.div
-        style={{ y: yAvatar, opacity, mixBlendMode: 'multiply' }}
+        style={{ y: yAvatar, opacity, mixBlendMode: theme === 'dark' ? 'screen' : 'multiply' }}
         className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-center pointer-events-none"
       >
         {/* CSS entrance animation — separate element so it doesn't interfere with blend */}
