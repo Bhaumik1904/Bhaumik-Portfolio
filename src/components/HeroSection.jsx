@@ -185,12 +185,12 @@ const HeroSection = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 1.0, delay: 0.2, ease: 'easeOut' }}
           style={{ x: isMobile ? 0 : mouseX, y: isMobile ? 0 : mouseY, willChange: 'transform' }}
-          className="relative flex items-start justify-center w-full h-[55vh] md:h-[85vh] overflow-hidden"
+          className="relative flex items-start justify-center w-full h-[55vh] md:h-[85vh] overflow-hidden md:mix-blend-multiply"
         >
           <img
             src="/bhaumik.png"
             alt="Bhaumik Hinunia"
-            className={`md:mix-blend-multiply mix-blend-normal hero-entrance ${floatReady ? 'hero-float' : ''}`}
+            className={`mix-blend-multiply ${floatReady ? 'hero-float' : ''}`}
             style={{
               height: '115%',
               width: 'auto',
