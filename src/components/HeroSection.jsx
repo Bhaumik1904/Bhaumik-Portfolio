@@ -170,25 +170,27 @@ const HeroSection = () => {
       </div>
 
       {/* ── Avatar ── */}
-      {/* Outer: scroll parallax + fade */}
+      {/* Outer: scroll parallax + fade + mix-blend-mode on the SAME element as the transform */}
+      {/* IMPORTANT: mix-blend-mode must be on the outermost element with the transform. */}
+      {/* Children must NOT have mix-blend-mode — it traps blending inside stacking contexts */}
       <motion.div
-        style={{ y: yAvatar, opacity }}
+        style={{ y: yAvatar, opacity, mixBlendMode: 'multiply' }}
         className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-center pointer-events-none"
       >
-        {/* Middle: CSS entrance slide-up (no JS animation overhead) */}
+        {/* CSS entrance animation — separate element so it doesn't interfere with blend */}
         <div
-          className="hero-anim hero-slide-up w-full flex items-start justify-center h-[55vh] md:h-[85vh] overflow-hidden mix-blend-multiply"
+          className="hero-anim hero-slide-up w-full flex items-start justify-center h-[55vh] md:h-[85vh] overflow-hidden"
           style={{ animationDelay: '0.2s' }}
         >
-          {/* Inner: mouse parallax via motion values (no re-renders) */}
+          {/* Inner: mouse parallax via motion values only */}
           <motion.div
             style={{ x: isMobile ? 0 : mouseX, y: isMobile ? 0 : mouseY }}
-            className="w-full h-full flex items-start justify-center mix-blend-multiply"
+            className="w-full h-full flex items-start justify-center"
           >
             <img
               src="/bhaumik.png"
               alt="Bhaumik Hinunia"
-              className="hero-float mix-blend-multiply"
+              className="hero-float"
               style={{
                 height: '115%',
                 width: 'auto',
