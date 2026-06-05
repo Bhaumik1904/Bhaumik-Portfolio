@@ -63,7 +63,7 @@ const HeroSection = () => {
       {/* Background text — static, no entrance animation. It's 3% opacity, nobody notices.
           Scroll-driven parallax still works (yText). No per-frame paint cost. */}
       <motion.div
-        className="absolute w-full flex flex-col items-center justify-center pointer-events-none select-none z-0 hidden md:flex"
+        className="absolute w-full flex-col items-center justify-center pointer-events-none select-none z-0 hidden md:flex"
         style={{ y: yText, opacity }}
       >
         <h1
