@@ -5,9 +5,9 @@ const ThemeContext = createContext({ theme: 'light', toggleTheme: () => {} });
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
     if (typeof window === 'undefined') return 'light';
+    // If the user has previously chosen a theme, respect it — otherwise always default to light
     const saved = localStorage.getItem('portfolio-theme');
-    if (saved) return saved;
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    return saved || 'light';
   });
 
   useEffect(() => {
