@@ -34,9 +34,19 @@ const HeroSection = () => {
   return (
     <section
       ref={ref}
-      className="relative flex items-center justify-center overflow-hidden transition-colors"
-      style={{ height: '100vh', backgroundColor: 'var(--bg)' }}
+      className="relative flex items-center justify-center overflow-hidden"
+      style={{ height: '100vh', backgroundColor: '#FFFFFF' }}
     >
+      {/* Dark mode gradient overlay — fades the hero bottom into the dark page bg */}
+      {theme === 'dark' && (
+        <div
+          className="absolute inset-x-0 bottom-0 z-20 pointer-events-none"
+          style={{
+            height: '35%',
+            background: 'linear-gradient(to bottom, transparent, #0d0d14)',
+          }}
+        />
+      )}
       {/* Color wash — desktop only (has blur filter) */}
       <div
         className="absolute inset-0 pointer-events-none z-30 hidden md:block"
@@ -176,7 +186,7 @@ const HeroSection = () => {
       {/* IMPORTANT: mix-blend-mode must be on the outermost element with the transform. */}
       {/* Children must NOT have mix-blend-mode — it traps blending inside stacking contexts */}
       <motion.div
-        style={{ y: yAvatar, opacity, mixBlendMode: theme === 'dark' ? 'screen' : 'multiply' }}
+        style={{ y: yAvatar, opacity, mixBlendMode: 'multiply' }}
         className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-center pointer-events-none"
       >
         {/* CSS entrance animation — separate element so it doesn't interfere with blend */}
