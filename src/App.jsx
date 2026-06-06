@@ -12,6 +12,9 @@ import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import NoiseOverlay from './components/NoiseOverlay';
 import CommandPalette from './components/CommandPalette';
+import ScrollProgressBar from './components/ScrollProgressBar';
+import GitHubStats from './components/GitHubStats';
+import CertificationsSection from './components/CertificationsSection';
 
 function App() {
   const [splashDone, setSplashDone] = useState(false);
@@ -57,14 +60,17 @@ function App() {
       </AnimatePresence>
 
       <NoiseOverlay />
+      <ScrollProgressBar />
       <CommandPalette />
       <Navbar />
       <main>
         <HeroSection />
+        <GitHubStats />
         <SkillsSection />
         <ProjectsSection />
         <WorkspaceSection />
         <AboutSection />
+        <CertificationsSection />
         <ContactSection />
       </main>
       <Footer />

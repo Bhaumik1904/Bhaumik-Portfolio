@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import ProjectModal from './ProjectModal';
 
@@ -73,13 +73,35 @@ const cardVariants = {
 
 const ProjectCard = ({ project, index, onSelect }) => {
   const isEven = index % 2 === 0;
+  const cardRef = useRef(null);
+
+  const handleMouseMove = (e) => {
+    if (!cardRef.current || window.matchMedia('(hover: none)').matches) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const cx = rect.width / 2;
+    const cy = rect.height / 2;
+    const rotateX = ((y - cy) / cy) * -5;
+    const rotateY = ((x - cx) / cx) * 5;
+    cardRef.current.style.transition = 'transform 0.08s ease';
+    cardRef.current.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.01)`;
+  };
+
+  const handleMouseLeave = () => {
+    if (!cardRef.current) return;
+    cardRef.current.style.transition = 'transform 0.55s cubic-bezier(0.16,1,0.3,1)';
+    cardRef.current.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale(1)';
+  };
 
   return (
     <motion.article
+      ref={cardRef}
       variants={cardVariants}
       className="apple-card overflow-hidden cursor-pointer"
-      whileHover={{ y: -4, boxShadow: 'var(--shadow-md)' }}
-      transition={{ duration: 0.3, ease: 'easeOut' }}
+      style={{ willChange: 'transform' }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       onClick={() => onSelect(project)}
     >
       {/* Project header band */}

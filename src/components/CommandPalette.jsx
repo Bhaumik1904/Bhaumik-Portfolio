@@ -7,6 +7,7 @@ const COMMANDS = [
     items: [
       { id: 'work',    icon: '💼', label: 'View Projects',   action: () => document.querySelector('#work')?.scrollIntoView({ behavior: 'smooth' }) },
       { id: 'about',   icon: '👤', label: 'About Me',        action: () => document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' }) },
+      { id: 'certs',   icon: '🏅', label: 'Certifications',  action: () => document.querySelector('#certifications')?.scrollIntoView({ behavior: 'smooth' }) },
       { id: 'contact', icon: '✉️', label: 'Contact',         action: () => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }) },
       { id: 'top',     icon: '⬆️', label: 'Back to Top',     action: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
     ],
