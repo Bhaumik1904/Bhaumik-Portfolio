@@ -1,85 +1,140 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-const LETTERS = 'Bhaumik Hinunia'.split('');
-
 const SplashScreen = ({ onDone }) => {
   useEffect(() => {
-    // Total animation time: ~2s. Trigger exit at 1.8s.
-    const t = setTimeout(onDone, 1800);
+    const t = setTimeout(onDone, 2200);
     return () => clearTimeout(t);
   }, [onDone]);
 
   return (
     <motion.div
-      className="fixed inset-0 z-[99999] flex flex-col items-center justify-center select-none"
-      style={{ background: '#08080f' }}
+      className="fixed inset-0 z-[99999] flex flex-col items-center justify-center overflow-hidden"
+      style={{ background: '#FFFFFF' }}
       exit={{ y: '-100%' }}
-      transition={{ duration: 0.75, ease: [0.76, 0, 0.24, 1] }}
+      transition={{ duration: 0.85, ease: [0.76, 0, 0.24, 1] }}
     >
-      {/* BH Monogram */}
+      {/* Thin accent line that draws across — same as site's progress indicator */}
       <motion.div
-        initial={{ scale: 0.6, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-        className="mb-7"
+        className="absolute top-0 left-0 h-[2px]"
+        style={{ background: 'linear-gradient(90deg, #0071E3, #7c3aed)' }}
+        initial={{ width: '0%' }}
+        animate={{ width: '100%' }}
+        transition={{ duration: 1.8, delay: 0.1, ease: 'easeInOut' }}
+      />
+
+      {/* Main content — matches the hero section layout */}
+      <div className="relative w-full max-w-7xl mx-auto px-6 md:px-16 lg:px-24 flex flex-col md:flex-row items-center justify-between select-none">
+
+        {/* Left: Hello I'm + Bhaumik */}
+        <div className="overflow-hidden flex flex-col items-center md:items-start">
+          {/* "Hello, I'm" label */}
+          <motion.span
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.5 }}
+            className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase mb-2 md:mb-3 block"
+            style={{ color: '#0071E3' }}
+          >
+            Hello, I'm
+          </motion.span>
+
+          {/* "Bhaumik" wipes in from left — clip-path reveal */}
+          <div className="overflow-hidden">
+            <motion.h1
+              initial={{ x: -80, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 0.25, duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+              className="font-black tracking-tighter"
+              style={{
+                fontSize: 'clamp(4.5rem, 14vw, 12rem)',
+                color: '#1D1D1F',
+                lineHeight: 0.9,
+                letterSpacing: '-0.04em',
+              }}
+            >
+              Bhaumik
+            </motion.h1>
+          </div>
+        </div>
+
+        {/* Right: Full Stack + Hinunia */}
+        <div className="overflow-hidden flex flex-col items-center md:items-end mt-2 md:mt-0">
+          {/* "Full Stack Developer" label */}
+          <motion.span
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase mb-2 md:mb-3 hidden md:block"
+            style={{ color: '#6E6E73' }}
+          >
+            Full Stack Developer
+          </motion.span>
+
+          {/* "Hinunia" wipes in from right */}
+          <div className="overflow-hidden">
+            <motion.h1
+              initial={{ x: 80, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+              className="font-black tracking-tighter"
+              style={{
+                fontSize: 'clamp(4.5rem, 14vw, 12rem)',
+                color: '#1D1D1F',
+                lineHeight: 0.9,
+                letterSpacing: '-0.04em',
+              }}
+            >
+              Hinunia
+            </motion.h1>
+          </div>
+        </div>
+      </div>
+
+      {/* Large watermark background text — exactly like hero */}
+      <div
+        className="absolute w-full flex flex-col items-center justify-center pointer-events-none select-none z-[-1]"
       >
-        <div
-          className="w-20 h-20 rounded-[22px] flex items-center justify-center font-black text-2xl tracking-tighter text-white shadow-2xl"
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+          className="font-black tracking-tighter uppercase text-center"
           style={{
-            background: 'linear-gradient(135deg, #3B9EFF 0%, #7c3aed 100%)',
+            fontSize: 'clamp(6rem, 22vw, 24rem)',
+            color: 'rgba(0,0,0,0.03)',
+            lineHeight: 0.8,
             letterSpacing: '-0.04em',
-            boxShadow: '0 0 60px rgba(59,158,255,0.35), 0 0 120px rgba(124,58,237,0.2)',
           }}
         >
           BH
-        </div>
-      </motion.div>
-
-      {/* Name — letter-by-letter reveal */}
-      <div className="flex overflow-hidden" aria-label="Bhaumik Hinunia">
-        {LETTERS.map((char, i) => (
-          <motion.span
-            key={i}
-            initial={{ y: 48, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{
-              delay: 0.35 + i * 0.038,
-              duration: 0.45,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-            className="font-black text-3xl md:text-4xl"
-            style={{
-              color: char === ' ' ? 'transparent' : '#F5F5F7',
-              letterSpacing: '-0.04em',
-              width: char === ' ' ? '0.45em' : 'auto',
-              display: 'inline-block',
-            }}
-          >
-            {char === ' ' ? '\u00A0' : char}
-          </motion.span>
-        ))}
+        </motion.div>
       </div>
 
-      {/* Subtitle */}
+      {/* Bottom: loading bar */}
+      <div
+        className="absolute bottom-0 left-0 w-full h-[3px]"
+        style={{ background: 'rgba(0,0,0,0.04)' }}
+      >
+        <motion.div
+          className="h-full"
+          style={{ background: 'linear-gradient(90deg, #0071E3, #7c3aed)' }}
+          initial={{ width: '0%' }}
+          animate={{ width: '100%' }}
+          transition={{ duration: 2.0, delay: 0.05, ease: 'easeInOut' }}
+        />
+      </div>
+
+      {/* Bottom tagline */}
       <motion.p
         initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 0.45, y: 0 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.1, duration: 0.5 }}
-        className="mt-3 text-xs font-semibold tracking-[0.22em] uppercase"
-        style={{ color: '#8E8E93' }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-xs font-semibold tracking-[0.2em] uppercase whitespace-nowrap"
+        style={{ color: '#6E6E73' }}
       >
-        Full Stack Developer
+        Building thoughtful digital products
       </motion.p>
-
-      {/* Progress line — sweeps from left to right */}
-      <motion.div
-        className="absolute bottom-0 left-0 h-[2px]"
-        style={{ background: 'linear-gradient(90deg, #3B9EFF, #7c3aed, #ec4899)' }}
-        initial={{ width: '0%' }}
-        animate={{ width: '100%' }}
-        transition={{ duration: 1.65, delay: 0.1, ease: 'easeInOut' }}
-      />
     </motion.div>
   );
 };
