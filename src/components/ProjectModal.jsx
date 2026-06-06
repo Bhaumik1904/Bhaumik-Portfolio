@@ -1,10 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useTheme } from '../context/ThemeContext';
 
 const ProjectModal = ({ project, onClose }) => {
-  const { theme } = useTheme();
-
   // Lock body scroll + Escape key handler
   useEffect(() => {
     if (!project) return;
@@ -57,7 +54,7 @@ const ProjectModal = ({ project, onClose }) => {
               {/* Hero band with project colour */}
               <div
                 className="px-8 pt-8 pb-10 relative"
-                style={{ background: theme === 'dark' ? `${project.color}15` : project.bgLight }}
+                style={{ background: project.bgLight }}
               >
                 {/* Close button */}
                 <button
@@ -75,7 +72,7 @@ const ProjectModal = ({ project, onClose }) => {
                 <div className="flex items-start gap-5">
                   <div
                     className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0"
-                    style={{ background: theme === 'dark' ? 'rgba(255,255,255,0.05)' : 'white', boxShadow: `0 8px 24px ${project.color}22` }}
+                    style={{ background: 'white', boxShadow: `0 8px 24px ${project.color}22` }}
                   >
                     {project.emoji}
                   </div>

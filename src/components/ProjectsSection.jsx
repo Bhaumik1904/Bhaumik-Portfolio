@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useTheme } from '../context/ThemeContext';
 import ProjectModal from './ProjectModal';
 
 const projects = [
@@ -74,7 +73,6 @@ const cardVariants = {
 
 const ProjectCard = ({ project, index, onSelect }) => {
   const isEven = index % 2 === 0;
-  const { theme } = useTheme();
 
   return (
     <motion.article
@@ -87,12 +85,12 @@ const ProjectCard = ({ project, index, onSelect }) => {
       {/* Project header band */}
       <div
         className="px-8 py-6 flex items-center justify-between"
-        style={{ background: theme === 'dark' ? `${project.color}15` : project.bgLight, borderBottom: '1px solid var(--border)' }}
+        style={{ background: project.bgLight, borderBottom: '1px solid var(--border)' }}
       >
         <div className="flex items-center gap-4">
           <div
             className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl"
-            style={{ background: theme === 'dark' ? 'rgba(255,255,255,0.05)' : 'white', boxShadow: `0 4px 16px ${project.color}22` }}
+            style={{ background: 'white', boxShadow: `0 4px 16px ${project.color}22` }}
           >
             {project.emoji}
           </div>

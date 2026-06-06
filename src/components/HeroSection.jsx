@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
-import { useTheme } from '../context/ThemeContext';
 
 const HeroSection = () => {
   const ref = useRef(null);
@@ -16,7 +15,6 @@ const HeroSection = () => {
   const mouseY = useSpring(rawY, { stiffness: 50, damping: 20 });
 
   const [isMobile, setIsMobile] = useState(false);
-  const { theme } = useTheme();
 
   useEffect(() => {
     const mobile = window.innerWidth < 768 || 'ontouchstart' in window;
@@ -37,16 +35,6 @@ const HeroSection = () => {
       className="relative flex items-center justify-center overflow-hidden"
       style={{ height: '100vh', backgroundColor: '#FFFFFF' }}
     >
-      {/* Dark mode gradient overlay — fades the hero bottom into the dark page bg */}
-      {theme === 'dark' && (
-        <div
-          className="absolute inset-x-0 bottom-0 z-20 pointer-events-none"
-          style={{
-            height: '35%',
-            background: 'linear-gradient(to bottom, transparent, #0d0d14)',
-          }}
-        />
-      )}
       {/* Color wash — desktop only (has blur filter) */}
       <div
         className="absolute inset-0 pointer-events-none z-30 hidden md:block"

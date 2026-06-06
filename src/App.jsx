@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import Lenis from 'lenis';
-import { ThemeProvider } from './context/ThemeContext';
 import SplashScreen from './components/SplashScreen';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
@@ -13,7 +12,7 @@ import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import NoiseOverlay from './components/NoiseOverlay';
 
-function AppContent() {
+function App() {
   const [splashDone, setSplashDone] = useState(false);
 
   useEffect(() => {
@@ -56,7 +55,6 @@ function AppContent() {
         )}
       </AnimatePresence>
 
-      {/* Main site content — renders underneath but shown after splash exits */}
       <NoiseOverlay />
       <Navbar />
       <main>
@@ -69,14 +67,6 @@ function AppContent() {
       </main>
       <Footer />
     </div>
-  );
-}
-
-function App() {
-  return (
-    <ThemeProvider>
-      <AppContent />
-    </ThemeProvider>
   );
 }
 
