@@ -11,6 +11,7 @@ import AboutSection from './components/AboutSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import NoiseOverlay from './components/NoiseOverlay';
+import CommandPalette from './components/CommandPalette';
 
 function App() {
   const [splashDone, setSplashDone] = useState(false);
@@ -56,6 +57,7 @@ function App() {
       </AnimatePresence>
 
       <NoiseOverlay />
+      <CommandPalette />
       <Navbar />
       <main>
         <HeroSection />

@@ -207,3 +207,9 @@
 .hero-fade-up    { animation-name: heroFadeUp;    animation-duration: 0.7s; }
 .hero-fade-in    { animation-name: heroFadeIn;    animation-duration: 1.0s; }
 .hero-slide-up   { animation-name: heroSlideUp;   animation-duration: 1.1s; }
+
+/* Typewriter cursor blink */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}

@@ -1,8 +1,54 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
 
+// Typewriter — pure hook, no library needed
+const ROLES = ['Full Stack Developer', 'ML Engineer', 'React Developer', 'UI/UX Enthusiast'];
+
+function useTypewriter(words, typeSpeed = 75, deleteSpeed = 45, pauseMs = 1800) {
+  const [text, setText] = useState('');
+  const state = useRef({ wordIdx: 0, phase: 'typing', charIdx: 0 });
+
+  useEffect(() => {
+    const s = state.current;
+    let timer;
+
+    const tick = () => {
+      const word = words[s.wordIdx % words.length];
+      let delay = typeSpeed;
+
+      if (s.phase === 'typing') {
+        if (s.charIdx < word.length) {
+          s.charIdx++;
+          setText(word.slice(0, s.charIdx));
+        } else {
+          s.phase = 'deleting';
+          delay = pauseMs;
+        }
+      } else {
+        if (s.charIdx > 0) {
+          s.charIdx--;
+          setText(word.slice(0, s.charIdx));
+          delay = deleteSpeed;
+        } else {
+          s.wordIdx++;
+          s.phase = 'typing';
+        }
+      }
+
+      timer = setTimeout(tick, delay);
+    };
+
+    timer = setTimeout(tick, 800); // initial delay before typing starts
+    return () => clearTimeout(timer);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return text;
+}
+
 const HeroSection = () => {
   const ref = useRef(null);
+  const role = useTypewriter(ROLES);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
   const yAvatar = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
   const yText   = useTransform(scrollYProgress, [0, 1], ['0%', '60%']);
@@ -91,6 +137,31 @@ const HeroSection = () => {
           className="hero-anim hero-fade-left flex flex-col items-center md:items-start text-center md:text-left mb-4 md:mb-0 w-full md:w-auto"
           style={{ animationDelay: '0.35s' }}
         >
+          {/* Available for work badge */}
+          <div
+            className="hero-anim hero-fade-up flex items-center gap-2 mb-3 px-3 py-1.5 rounded-full w-fit"
+            style={{
+              animationDelay: '0.2s',
+              background: 'rgba(48,209,88,0.1)',
+              border: '1px solid rgba(48,209,88,0.25)',
+            }}
+          >
+            {/* Pulsing green dot */}
+            <span className="relative flex h-2 w-2">
+              <span
+                className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-70"
+                style={{ background: '#30D158' }}
+              />
+              <span
+                className="relative inline-flex h-2 w-2 rounded-full"
+                style={{ background: '#30D158' }}
+              />
+            </span>
+            <span className="text-[11px] font-bold tracking-wide" style={{ color: '#1a8c3a' }}>
+              Open to opportunities
+            </span>
+          </div>
+
           <span
             className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase mb-1 md:mb-3"
             style={{ color: 'var(--accent)' }}
@@ -129,11 +200,16 @@ const HeroSection = () => {
           className="hero-anim hero-fade-right flex flex-col items-center md:items-end text-center md:text-right w-full md:w-auto mt-2 md:mt-0"
           style={{ animationDelay: '0.5s' }}
         >
+          {/* Typing subtitle — desktop */}
           <span
-            className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase mb-1 md:mb-3 hidden md:block"
-            style={{ color: 'var(--secondary)' }}
+            className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase mb-1 md:mb-3 hidden md:flex items-center gap-1"
+            style={{ color: 'var(--secondary)', minHeight: '1.2em' }}
           >
-            Full Stack Developer
+            {role}
+            <span
+              className="inline-block w-[2px] h-[0.9em] ml-0.5 rounded-full align-middle"
+              style={{ background: 'var(--accent)', animation: 'blink 1s step-end infinite' }}
+            />
           </span>
           <h2
             className="text-6xl md:text-7xl lg:text-[7rem] font-black tracking-tighter"
@@ -141,11 +217,16 @@ const HeroSection = () => {
           >
             Hinunia
           </h2>
+          {/* Typing subtitle — mobile */}
           <span
-            className="text-xs font-bold tracking-[0.2em] uppercase mt-2 md:hidden block"
-            style={{ color: 'var(--secondary)' }}
+            className="text-xs font-bold tracking-[0.2em] uppercase mt-2 md:hidden flex items-center justify-center gap-1"
+            style={{ color: 'var(--secondary)', minHeight: '1.2em' }}
           >
-            Full Stack Developer
+            {role}
+            <span
+              className="inline-block w-[2px] h-[0.85em] ml-0.5 rounded-full"
+              style={{ background: 'var(--accent)', animation: 'blink 1s step-end infinite' }}
+            />
           </span>
 
           {/* Description + resume — mobile only */}
