@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import toast from '../utils/toast';
 
 const COMMANDS = [
   {
@@ -68,6 +69,7 @@ const CommandPalette = () => {
   const runAction = useCallback((item) => {
     if (item.action === 'copy-email') {
       navigator.clipboard.writeText('bhaumikhinunia019@gmail.com');
+      toast.info('Email copied to clipboard 📫');
       setJustCopied(true);
       setTimeout(() => setJustCopied(false), 2000);
       return; // stay open so user can see feedback

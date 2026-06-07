@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import toast from '../utils/toast';
 
 const ContactSection = () => {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
@@ -28,14 +29,15 @@ const ContactSection = () => {
       if (data.success) {
         setSent(true);
         setForm({ name: '', email: '', message: '' });
+        toast.success('Message sent! I\'ll get back to you soon 🙌');
         setTimeout(() => setSent(false), 4000);
       } else {
-        console.error("Form error:", data);
-        alert("Something went wrong. Please try again.");
+        console.error('Form error:', data);
+        toast.error('Something went wrong. Please try again.');
       }
     } catch (error) {
-      console.error("Submission failed:", error);
-      alert("Failed to send message. Please check your connection.");
+      console.error('Submission failed:', error);
+      toast.error('Failed to send. Please check your connection.');
     } finally {
       setIsSubmitting(false);
     }

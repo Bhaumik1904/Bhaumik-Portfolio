@@ -15,6 +15,8 @@ import CommandPalette from './components/CommandPalette';
 import ScrollProgressBar from './components/ScrollProgressBar';
 import GitHubStats from './components/GitHubStats';
 import CertificationsSection from './components/CertificationsSection';
+import Toast from './components/Toast';
+import StatsStrip from './components/StatsStrip';
 
 function App() {
   const [splashDone, setSplashDone] = useState(false);
@@ -61,11 +63,13 @@ function App() {
 
       <NoiseOverlay />
       <ScrollProgressBar />
+      <Toast />
       <CommandPalette />
       <Navbar />
       <main>
         <HeroSection />
         <GitHubStats />
+        <StatsStrip />
         <SkillsSection />
         <ProjectsSection />
         <WorkspaceSection />

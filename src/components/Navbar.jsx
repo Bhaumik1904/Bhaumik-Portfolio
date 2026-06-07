@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import MagneticButton from './MagneticButton';
 
 const navItems = [
   { label: 'Work', href: '#work' },
@@ -84,12 +85,14 @@ const Navbar = () => {
 
           {/* CTA — desktop */}
           <div className="hidden md:flex items-center gap-3">
-            <button
-              onClick={() => scrollTo('#contact')}
-              className="btn-apple text-sm"
-            >
-              Let's talk
-            </button>
+            <MagneticButton>
+              <button
+                onClick={() => scrollTo('#contact')}
+                className="btn-apple text-sm"
+              >
+                Let's talk
+              </button>
+            </MagneticButton>
           </div>
 
           {/* Mobile hamburger */}

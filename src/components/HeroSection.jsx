@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
+import MagneticButton from './MagneticButton';
 
 // Typewriter — pure hook, no library needed
 const ROLES = ['Full Stack Developer', 'ML Engineer', 'React Developer', 'UI/UX Enthusiast'];
@@ -183,15 +184,17 @@ const HeroSection = () => {
             <p className="text-sm md:text-base font-medium leading-relaxed" style={{ color: 'var(--secondary)' }}>
               Building thoughtful digital products and AI-powered experiences.
             </p>
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 mt-6 px-6 py-3 rounded-full text-sm font-semibold transition-all hover:scale-105 pointer-events-auto"
-              style={{ background: 'var(--text)', color: 'var(--bg)' }}
-            >
-              Resume ↗
-            </a>
+            <MagneticButton>
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 mt-6 px-6 py-3 rounded-full text-sm font-semibold transition-all hover:scale-105 pointer-events-auto"
+                style={{ background: 'var(--text)', color: 'var(--bg)' }}
+              >
+                Resume ↗
+              </a>
+            </MagneticButton>
           </div>
         </div>
 

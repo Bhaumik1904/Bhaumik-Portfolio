@@ -34,15 +34,17 @@ const GitHubStats = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const [userRes, reposRes] = await Promise.all([
+        const [userRes, reposRes, contribRes] = await Promise.all([
           fetch('https://api.github.com/users/Bhaumik1904'),
           fetch('https://api.github.com/users/Bhaumik1904/repos?per_page=100'),
+          fetch('https://github-contributions-api.jogruber.de/v4/Bhaumik1904?y=all'),
         ]);
 
         if (!userRes.ok) throw new Error('GitHub API limit reached');
 
         const user = await userRes.json();
         const repos = await reposRes.json();
+        const contribData = contribRes.ok ? await contribRes.json() : null;
 
         const totalStars = Array.isArray(repos)
           ? repos.reduce((acc, r) => acc + (r.stargazers_count || 0), 0)
@@ -52,16 +54,20 @@ const GitHubStats = () => {
           ? repos.reduce((acc, r) => acc + (r.forks_count || 0), 0)
           : 0;
 
+        // Sum all years' contributions
+        const totalContribs = contribData?.total
+          ? Object.values(contribData.total).reduce((a, b) => a + b, 0)
+          : 0;
+
         setStats({
           repos: user.public_repos ?? 0,
-          followers: user.followers ?? 0,
           stars: totalStars,
           forks: totalForks,
+          contributions: totalContribs,
         });
       } catch {
         setError(true);
-        // Graceful fallback — never crash the page
-        setStats({ repos: 12, followers: 8, stars: 6, forks: 3 });
+        setStats({ repos: 12, stars: 6, forks: 3, contributions: 350 });
       } finally {
         setLoading(false);
       }
@@ -72,10 +78,10 @@ const GitHubStats = () => {
 
   const ITEMS = stats
     ? [
-        { label: 'Public Repos', value: stats.repos,     icon: '📦', suffix: '' },
-        { label: 'GitHub Stars', value: stats.stars,     icon: '⭐', suffix: '' },
-        { label: 'Followers',    value: stats.followers, icon: '👥', suffix: '' },
-        { label: 'Forks',        value: stats.forks,     icon: '🍴', suffix: '' },
+        { label: 'Public Repos',   value: stats.repos,          icon: '📦', suffix: '' },
+        { label: 'GitHub Stars',   value: stats.stars,          icon: '⭐', suffix: '' },
+        { label: 'Contributions',  value: stats.contributions,  icon: '🟩', suffix: '' },
+        { label: 'Forks',          value: stats.forks,          icon: '🍴', suffix: '' },
       ]
     : [];
 
