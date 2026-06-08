@@ -276,7 +276,7 @@ const HeroSection = () => {
       >
         {/* CSS entrance animation — separate element so it doesn't interfere with blend */}
         <div
-          className="hero-anim hero-slide-up w-full flex items-start justify-center h-[55vh] md:h-[85vh] overflow-hidden"
+          className="hero-anim hero-slide-up w-full flex items-start justify-center h-[38vh] md:h-[85vh] overflow-hidden"
           style={{ animationDelay: '0.2s' }}
         >
           {/* Inner: mouse parallax via motion values only */}
