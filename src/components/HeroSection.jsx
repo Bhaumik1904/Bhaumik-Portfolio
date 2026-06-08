@@ -2,7 +2,6 @@ import React, { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
 import MagneticButton from './MagneticButton';
 
-// Typewriter — pure hook, no library needed
 const ROLES = ['Full Stack Developer', 'ML Engineer', 'React Developer', 'UI/UX Enthusiast'];
 
 function useTypewriter(words, typeSpeed = 75, deleteSpeed = 45, pauseMs = 1800) {
@@ -12,34 +11,19 @@ function useTypewriter(words, typeSpeed = 75, deleteSpeed = 45, pauseMs = 1800) 
   useEffect(() => {
     const s = state.current;
     let timer;
-
     const tick = () => {
       const word = words[s.wordIdx % words.length];
       let delay = typeSpeed;
-
       if (s.phase === 'typing') {
-        if (s.charIdx < word.length) {
-          s.charIdx++;
-          setText(word.slice(0, s.charIdx));
-        } else {
-          s.phase = 'deleting';
-          delay = pauseMs;
-        }
+        if (s.charIdx < word.length) { s.charIdx++; setText(word.slice(0, s.charIdx)); }
+        else { s.phase = 'deleting'; delay = pauseMs; }
       } else {
-        if (s.charIdx > 0) {
-          s.charIdx--;
-          setText(word.slice(0, s.charIdx));
-          delay = deleteSpeed;
-        } else {
-          s.wordIdx++;
-          s.phase = 'typing';
-        }
+        if (s.charIdx > 0) { s.charIdx--; setText(word.slice(0, s.charIdx)); delay = deleteSpeed; }
+        else { s.wordIdx++; s.phase = 'typing'; }
       }
-
       timer = setTimeout(tick, delay);
     };
-
-    timer = setTimeout(tick, 800); // initial delay before typing starts
+    timer = setTimeout(tick, 800);
     return () => clearTimeout(timer);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -55,7 +39,6 @@ const HeroSection = () => {
   const yText   = useTransform(scrollYProgress, [0, 1], ['0%', '60%']);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-  // Motion values for mouse parallax — never trigger a React re-render
   const rawX  = useMotionValue(0);
   const rawY  = useMotionValue(0);
   const mouseX = useSpring(rawX, { stiffness: 50, damping: 20 });
@@ -67,7 +50,6 @@ const HeroSection = () => {
     const mobile = window.innerWidth < 768 || 'ontouchstart' in window;
     setIsMobile(mobile);
     if (mobile) return;
-
     const onMouseMove = (e) => {
       rawX.set((e.clientX / window.innerWidth  - 0.5) * 25);
       rawY.set((e.clientY / window.innerHeight - 0.5) * 25);
@@ -76,13 +58,26 @@ const HeroSection = () => {
     return () => window.removeEventListener('mousemove', onMouseMove);
   }, [rawX, rawY]);
 
+  const Badge = () => (
+    <div
+      className="flex items-center gap-2 mb-3 px-3 py-1.5 rounded-full w-fit"
+      style={{ background: 'rgba(48,209,88,0.1)', border: '1px solid rgba(48,209,88,0.25)' }}
+    >
+      <span className="relative flex h-2 w-2">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-70" style={{ background: '#30D158' }} />
+        <span className="relative inline-flex h-2 w-2 rounded-full" style={{ background: '#30D158' }} />
+      </span>
+      <span className="text-[11px] font-bold tracking-wide" style={{ color: '#1a8c3a' }}>Open to opportunities</span>
+    </div>
+  );
+
   return (
     <section
       ref={ref}
       className="relative flex items-center justify-center overflow-hidden"
       style={{ height: '100vh', backgroundColor: '#FFFFFF' }}
     >
-      {/* Color wash — desktop only (has blur filter) */}
+      {/* Color wash — desktop only */}
       <div
         className="absolute inset-0 pointer-events-none z-30 hidden md:block"
         style={{
@@ -96,131 +91,60 @@ const HeroSection = () => {
         }}
       />
 
-      {/* ── Massive background watermark — CSS fade-in, desktop only ── */}
+      {/* Background watermark — desktop only */}
       <motion.div
         className="absolute w-full flex flex-col items-center justify-center pointer-events-none select-none z-0 hidden md:flex"
         style={{ y: yText, opacity }}
       >
-        <h1
-          className="font-black tracking-tighter hero-anim hero-fade-in"
-          style={{
-            fontSize: 'clamp(6rem, 20vw, 22rem)',
-            color: 'rgba(0,0,0,0.03)',
-            lineHeight: 0.75,
-            textTransform: 'uppercase',
-            animationDelay: '0.05s',
-          }}
-        >
-          Bhaumik
-        </h1>
-        <h1
-          className="font-black tracking-tighter hero-anim hero-fade-in"
-          style={{
-            fontSize: 'clamp(6rem, 20vw, 22rem)',
-            color: 'rgba(0,0,0,0.03)',
-            lineHeight: 0.75,
-            textTransform: 'uppercase',
-            marginLeft: '15vw',
-            animationDelay: '0.15s',
-          }}
-        >
-          Hinunia
-        </h1>
+        <h1 className="font-black tracking-tighter hero-anim hero-fade-in" style={{ fontSize: 'clamp(6rem, 20vw, 22rem)', color: 'rgba(0,0,0,0.03)', lineHeight: 0.75, textTransform: 'uppercase', animationDelay: '0.05s' }}>Bhaumik</h1>
+        <h1 className="font-black tracking-tighter hero-anim hero-fade-in" style={{ fontSize: 'clamp(6rem, 20vw, 22rem)', color: 'rgba(0,0,0,0.03)', lineHeight: 0.75, textTransform: 'uppercase', marginLeft: '15vw', animationDelay: '0.15s' }}>Hinunia</h1>
       </motion.div>
 
-      {/* ── Foreground names — CSS animations, no JS overhead ── */}
+      {/* ── MOBILE layout: single centered column ── */}
       <div
-        className="absolute inset-0 flex flex-col md:flex-row items-center justify-start md:justify-between px-6 md:px-16 lg:px-24 pointer-events-none z-20 pt-[10vh] md:pt-0"
+        className="md:hidden absolute inset-0 z-20 pointer-events-none flex flex-col items-center justify-start pt-[10vh] px-6 text-center"
         style={{ opacity }}
       >
-        {/* LEFT (desktop) / SINGLE COLUMN (mobile) */}
-        <div
-          className="hero-anim hero-fade-left flex flex-col items-center md:items-start text-center md:text-left w-full md:w-auto"
-          style={{ animationDelay: '0.35s' }}
-        >
-          {/* Available for work badge */}
-          <div
-            className="hero-anim hero-fade-up flex items-center gap-2 mb-3 px-3 py-1.5 rounded-full w-fit"
-            style={{
-              animationDelay: '0.2s',
-              background: 'rgba(48,209,88,0.1)',
-              border: '1px solid rgba(48,209,88,0.25)',
-            }}
-          >
-            {/* Pulsing green dot */}
-            <span className="relative flex h-2 w-2">
-              <span
-                className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-70"
-                style={{ background: '#30D158' }}
-              />
-              <span
-                className="relative inline-flex h-2 w-2 rounded-full"
-                style={{ background: '#30D158' }}
-              />
-            </span>
-            <span className="text-[11px] font-bold tracking-wide" style={{ color: '#1a8c3a' }}>
-              Open to opportunities
-            </span>
-          </div>
-
-          <span
-            className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase mb-1 md:mb-3"
-            style={{ color: 'var(--accent)' }}
-          >
-            Hello, I'm
-          </span>
-
-          {/* Both names stacked — visible on mobile */}
-          <h2
-            className="text-6xl md:text-7xl lg:text-[7rem] font-black tracking-tighter"
-            style={{ color: 'var(--text)', lineHeight: 0.9 }}
-          >
-            Bhaumik
-          </h2>
-          <h2
-            className="text-6xl font-black tracking-tighter md:hidden"
-            style={{ color: 'var(--text)', lineHeight: 0.9 }}
-          >
-            Hinunia
-          </h2>
-
-          {/* Role subtitle — mobile */}
-          <span
-            className="text-xs font-bold tracking-[0.2em] uppercase mt-3 md:hidden flex items-center gap-1"
-            style={{ color: 'var(--secondary)', minHeight: '1.2em' }}
-          >
+        <div className="hero-anim hero-fade-up" style={{ animationDelay: '0.2s' }}>
+          <Badge />
+        </div>
+        <div className="hero-anim hero-fade-up" style={{ animationDelay: '0.35s' }}>
+          <span className="text-xs font-bold tracking-[0.2em] uppercase mb-1 block" style={{ color: 'var(--accent)' }}>Hello, I'm</span>
+          <h2 className="text-6xl font-black tracking-tighter" style={{ color: 'var(--text)', lineHeight: 0.9 }}>Bhaumik</h2>
+          <h2 className="text-6xl font-black tracking-tighter" style={{ color: 'var(--text)', lineHeight: 0.9 }}>Hinunia</h2>
+          <span className="text-xs font-bold tracking-[0.2em] uppercase mt-3 flex items-center justify-center gap-1" style={{ color: 'var(--secondary)', minHeight: '1.2em' }}>
             {role}
-            <span
-              className="inline-block w-[2px] h-[0.85em] ml-0.5 rounded-full"
-              style={{ background: 'var(--accent)', animation: 'blink 1s step-end infinite' }}
-            />
+            <span className="inline-block w-[2px] h-[0.85em] ml-0.5 rounded-full" style={{ background: 'var(--accent)', animation: 'blink 1s step-end infinite' }} />
           </span>
-
-          {/* Description + resume — mobile */}
-          <div
-            className="hero-anim hero-fade-up mt-3 max-w-[260px] md:hidden flex flex-col items-center"
-            style={{ animationDelay: '0.8s' }}
+        </div>
+        <div className="hero-anim hero-fade-up mt-3 flex flex-col items-center" style={{ animationDelay: '0.8s' }}>
+          <p className="text-sm font-medium leading-relaxed max-w-[260px]" style={{ color: 'var(--secondary)' }}>
+            Building thoughtful digital products and AI-powered experiences.
+          </p>
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 mt-4 px-6 py-3 rounded-full text-sm font-semibold pointer-events-auto"
+            style={{ background: 'var(--text)', color: 'var(--bg)' }}
           >
-            <p className="text-sm font-medium leading-relaxed text-center" style={{ color: 'var(--secondary)' }}>
-              Building thoughtful digital products and AI-powered experiences.
-            </p>
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 mt-4 px-6 py-3 rounded-full text-sm font-semibold pointer-events-auto shadow-sm"
-              style={{ background: 'var(--text)', color: 'var(--bg)' }}
-            >
-              Resume ↗
-            </a>
-          </div>
+            Resume ↗
+          </a>
+        </div>
+      </div>
 
-          {/* Description + resume — desktop only */}
-          <div
-            className="hero-anim hero-fade-up mt-6 md:mt-8 max-w-[280px] md:max-w-sm hidden md:block"
-            style={{ animationDelay: '0.8s' }}
-          >
-            <p className="text-sm md:text-base font-medium leading-relaxed" style={{ color: 'var(--secondary)' }}>
+      {/* ── DESKTOP layout: left / right split ── */}
+      <div
+        className="hidden md:flex absolute inset-0 z-20 pointer-events-none flex-row items-center justify-between px-16 lg:px-24"
+        style={{ opacity }}
+      >
+        {/* LEFT */}
+        <div className="hero-anim hero-fade-left flex flex-col items-start text-left" style={{ animationDelay: '0.35s' }}>
+          <div className="hero-anim hero-fade-up" style={{ animationDelay: '0.2s' }}><Badge /></div>
+          <span className="text-sm font-bold tracking-[0.2em] uppercase mb-3" style={{ color: 'var(--accent)' }}>Hello, I'm</span>
+          <h2 className="text-7xl lg:text-[7rem] font-black tracking-tighter" style={{ color: 'var(--text)', lineHeight: 0.9 }}>Bhaumik</h2>
+          <div className="hero-anim hero-fade-up mt-8 max-w-sm" style={{ animationDelay: '0.8s' }}>
+            <p className="text-base font-medium leading-relaxed" style={{ color: 'var(--secondary)' }}>
               Building thoughtful digital products and AI-powered experiences.
             </p>
             <MagneticButton>
@@ -237,49 +161,25 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* RIGHT: Hinunia + role — desktop only */}
-        <div
-          className="hero-anim hero-fade-right hidden md:flex flex-col items-end text-right w-auto"
-          style={{ animationDelay: '0.5s' }}
-        >
-          <span
-            className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase mb-1 md:mb-3 flex items-center gap-1"
-            style={{ color: 'var(--secondary)', minHeight: '1.2em' }}
-          >
+        {/* RIGHT */}
+        <div className="hero-anim hero-fade-right flex flex-col items-end text-right" style={{ animationDelay: '0.5s' }}>
+          <span className="text-sm font-bold tracking-[0.2em] uppercase mb-3 flex items-center gap-1" style={{ color: 'var(--secondary)', minHeight: '1.2em' }}>
             {role}
-            <span
-              className="inline-block w-[2px] h-[0.9em] ml-0.5 rounded-full align-middle"
-              style={{ background: 'var(--accent)', animation: 'blink 1s step-end infinite' }}
-            />
+            <span className="inline-block w-[2px] h-[0.9em] ml-0.5 rounded-full align-middle" style={{ background: 'var(--accent)', animation: 'blink 1s step-end infinite' }} />
           </span>
-          <h2
-            className="text-6xl md:text-7xl lg:text-[7rem] font-black tracking-tighter"
-            style={{ color: 'var(--text)', lineHeight: 0.9 }}
-          >
-            Hinunia
-          </h2>
-            <span
-              className="inline-block w-[2px] h-[0.85em] ml-0.5 rounded-full"
-              style={{ background: 'var(--accent)', animation: 'blink 1s step-end infinite' }}
-            />
-          </span>
+          <h2 className="text-7xl lg:text-[7rem] font-black tracking-tighter" style={{ color: 'var(--text)', lineHeight: 0.9 }}>Hinunia</h2>
         </div>
       </div>
 
       {/* ── Avatar ── */}
-      {/* Outer: scroll parallax + fade + conditional mix-blend-mode on the SAME element as the transform */}
-      {/* IMPORTANT: mix-blend-mode must be on the outermost element with the transform. */}
-      {/* Children must NOT have mix-blend-mode — it traps blending inside stacking contexts */}
       <motion.div
         style={{ y: yAvatar, opacity, mixBlendMode: 'multiply' }}
         className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-center pointer-events-none"
       >
-        {/* CSS entrance animation — separate element so it doesn't interfere with blend */}
         <div
-          className="hero-anim hero-slide-up w-full flex items-start justify-center h-[38vh] md:h-[85vh] overflow-hidden"
+          className="hero-anim hero-slide-up w-full flex items-start justify-center h-[42vh] md:h-[85vh] overflow-hidden"
           style={{ animationDelay: '0.2s' }}
         >
-          {/* Inner: mouse parallax via motion values only */}
           <motion.div
             style={{ x: isMobile ? 0 : mouseX, y: isMobile ? 0 : mouseY }}
             className="w-full h-full flex items-start justify-center"
@@ -305,9 +205,7 @@ const HeroSection = () => {
         className="hero-anim hero-fade-up absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-30 pointer-events-none"
         style={{ animationDelay: '1.1s', opacity }}
       >
-        <span className="text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: 'var(--secondary)' }}>
-          Scroll
-        </span>
+        <span className="text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: 'var(--secondary)' }}>Scroll</span>
         <div className="w-px h-16 overflow-hidden" style={{ background: 'rgba(0,0,0,0.1)' }}>
           <motion.div
             className="w-full h-1/2"
