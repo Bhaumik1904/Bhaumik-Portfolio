@@ -127,13 +127,15 @@ const SkillsSection = () => {
               <motion.div 
                 key={cat.id} 
                 onMouseEnter={() => setActiveCategory(cat)}
+                onClick={() => setActiveCategory(cat)}
                 className="relative group cursor-pointer py-2 md:py-4 w-max"
+                style={{ userSelect: 'none', WebkitUserSelect: 'none' }}
               >
                 <div 
                   className="text-5xl md:text-8xl font-black tracking-tighter transition-all duration-500"
                   style={{
                     color: activeCategory.id === cat.id ? 'var(--text)' : 'transparent',
-                    WebkitTextStroke: activeCategory.id === cat.id ? 'none' : '2px var(--border)',
+                    WebkitTextStroke: activeCategory.id === cat.id ? 'none' : '2px rgba(0,0,0,0.25)',
                     transform: activeCategory.id === cat.id ? 'translateX(20px)' : 'translateX(0px)',
                   }}
                 >
@@ -141,7 +143,7 @@ const SkillsSection = () => {
                 </div>
                 {/* Accent line indicator */}
                 <div 
-                  className="absolute left-[-20px] top-1/2 -translate-y-1/2 w-2 h-0 bg-blue-500 transition-all duration-500 rounded-full"
+                  className="absolute left-[-20px] top-1/2 -translate-y-1/2 w-2 bg-blue-500 transition-all duration-500 rounded-full"
                   style={{ height: activeCategory.id === cat.id ? '60%' : '0%' }}
                 />
               </motion.div>
@@ -152,14 +154,16 @@ const SkillsSection = () => {
         {/* Right Side: On desktop - Interactive Honeycomb. On mobile - Static grid */}
         {isMobile ? (
           <div className="w-full md:w-1/2 mt-8 z-30">
-            <div className="flex flex-wrap gap-2 justify-center">
+            <div className="flex flex-wrap gap-3 justify-center">
               {activeCategory.skills.map((skill) => (
                 <div
                   key={skill}
-                  className="px-4 py-2 rounded-2xl border text-sm font-bold bg-white/90 dark:bg-white/10 text-gray-800 dark:text-gray-100"
+                  className="px-5 py-2.5 rounded-2xl text-sm font-bold"
                   style={{
-                    borderColor: 'var(--border)',
-                    boxShadow: 'var(--shadow-sm)',
+                    background: 'var(--card)',
+                    border: '1.5px solid var(--accent)',
+                    color: 'var(--text)',
+                    boxShadow: '0 2px 10px rgba(0,113,227,0.12)',
                   }}
                 >
                   {skill}

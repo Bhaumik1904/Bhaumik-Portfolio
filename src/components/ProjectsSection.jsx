@@ -134,9 +134,9 @@ const ProjectCard = ({ project, index, onSelect }) => {
       </div>
 
       {/* Project body */}
-      <div className={`grid ${isEven ? 'md:grid-cols-5' : 'md:grid-cols-5'} gap-0`}>
+      <div className={`grid grid-cols-1 md:grid-cols-5 gap-0`}>
         {/* Description */}
-        <div className="md:col-span-3 p-8 border-r" style={{ borderColor: 'var(--border)' }}>
+        <div className="md:col-span-3 p-6 md:p-8 border-b md:border-b-0 md:border-r" style={{ borderColor: 'var(--border)' }}>
           <p className="text-base leading-relaxed mb-6" style={{ color: 'var(--secondary)' }}>
             {project.description}
           </p>
@@ -156,7 +156,7 @@ const ProjectCard = ({ project, index, onSelect }) => {
         </div>
 
         {/* Tech + Links */}
-        <div className="md:col-span-2 p-8 flex flex-col justify-between" style={{ background: 'var(--bg)' }}>
+        <div className="md:col-span-2 p-6 md:p-8 flex flex-col justify-between" style={{ background: 'var(--bg)' }}>
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--secondary)' }}>
               Technologies
@@ -168,7 +168,7 @@ const ProjectCard = ({ project, index, onSelect }) => {
             </div>
           </div>
 
-          <div className="flex gap-3 mt-8">
+          <div className="flex gap-3 mt-6 md:mt-8">
             <a
               href={project.github}
               target="_blank"

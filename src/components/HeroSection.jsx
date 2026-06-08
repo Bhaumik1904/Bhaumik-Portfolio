@@ -130,7 +130,7 @@ const HeroSection = () => {
 
       {/* ── Foreground names — CSS animations, no JS overhead ── */}
       <div
-        className="absolute inset-0 flex flex-col md:flex-row items-center justify-start md:justify-between px-6 md:px-16 lg:px-24 pointer-events-none z-10 pt-[12vh] md:pt-0"
+        className="absolute inset-0 flex flex-col md:flex-row items-center justify-start md:justify-between px-6 md:px-16 lg:px-24 pointer-events-none z-20 pt-[12vh] md:pt-0"
         style={{ opacity }}
       >
         {/* LEFT: Hello I'm + Bhaumik */}
