@@ -130,12 +130,12 @@ const HeroSection = () => {
 
       {/* ── Foreground names — CSS animations, no JS overhead ── */}
       <div
-        className="absolute inset-0 flex flex-col md:flex-row items-center justify-start md:justify-between px-6 md:px-16 lg:px-24 pointer-events-none z-20 pt-[12vh] md:pt-0"
+        className="absolute inset-0 flex flex-col md:flex-row items-center justify-start md:justify-between px-6 md:px-16 lg:px-24 pointer-events-none z-20 pt-[10vh] md:pt-0"
         style={{ opacity }}
       >
-        {/* LEFT: Hello I'm + Bhaumik */}
+        {/* LEFT (desktop) / SINGLE COLUMN (mobile) */}
         <div
-          className="hero-anim hero-fade-left flex flex-col items-center md:items-start text-center md:text-left mb-4 md:mb-0 w-full md:w-auto"
+          className="hero-anim hero-fade-left flex flex-col items-center md:items-start text-center md:text-left w-full md:w-auto"
           style={{ animationDelay: '0.35s' }}
         >
           {/* Available for work badge */}
@@ -169,12 +169,51 @@ const HeroSection = () => {
           >
             Hello, I'm
           </span>
+
+          {/* Both names stacked — visible on mobile */}
           <h2
             className="text-6xl md:text-7xl lg:text-[7rem] font-black tracking-tighter"
             style={{ color: 'var(--text)', lineHeight: 0.9 }}
           >
             Bhaumik
           </h2>
+          <h2
+            className="text-6xl font-black tracking-tighter md:hidden"
+            style={{ color: 'var(--text)', lineHeight: 0.9 }}
+          >
+            Hinunia
+          </h2>
+
+          {/* Role subtitle — mobile */}
+          <span
+            className="text-xs font-bold tracking-[0.2em] uppercase mt-3 md:hidden flex items-center gap-1"
+            style={{ color: 'var(--secondary)', minHeight: '1.2em' }}
+          >
+            {role}
+            <span
+              className="inline-block w-[2px] h-[0.85em] ml-0.5 rounded-full"
+              style={{ background: 'var(--accent)', animation: 'blink 1s step-end infinite' }}
+            />
+          </span>
+
+          {/* Description + resume — mobile */}
+          <div
+            className="hero-anim hero-fade-up mt-3 max-w-[260px] md:hidden flex flex-col items-center"
+            style={{ animationDelay: '0.8s' }}
+          >
+            <p className="text-sm font-medium leading-relaxed text-center" style={{ color: 'var(--secondary)' }}>
+              Building thoughtful digital products and AI-powered experiences.
+            </p>
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 mt-4 px-6 py-3 rounded-full text-sm font-semibold pointer-events-auto shadow-sm"
+              style={{ background: 'var(--text)', color: 'var(--bg)' }}
+            >
+              Resume ↗
+            </a>
+          </div>
 
           {/* Description + resume — desktop only */}
           <div
@@ -196,35 +235,15 @@ const HeroSection = () => {
               </a>
             </MagneticButton>
           </div>
-
-          {/* Description + resume — mobile only (in LEFT section so it's above avatar) */}
-          <div
-            className="hero-anim hero-fade-up mt-4 max-w-[260px] md:hidden flex flex-col items-center"
-            style={{ animationDelay: '0.8s' }}
-          >
-            <p className="text-sm font-medium leading-relaxed text-center" style={{ color: 'var(--secondary)' }}>
-              Building thoughtful digital products and AI-powered experiences.
-            </p>
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 mt-4 px-6 py-3 rounded-full text-sm font-semibold pointer-events-auto shadow-sm"
-              style={{ background: 'var(--text)', color: 'var(--bg)' }}
-            >
-              Resume ↗
-            </a>
-          </div>
         </div>
 
-        {/* RIGHT: Full Stack + Hinunia */}
+        {/* RIGHT: Hinunia + role — desktop only */}
         <div
-          className="hero-anim hero-fade-right flex flex-col items-center md:items-end text-center md:text-right w-full md:w-auto mt-2 md:mt-0"
+          className="hero-anim hero-fade-right hidden md:flex flex-col items-end text-right w-auto"
           style={{ animationDelay: '0.5s' }}
         >
-          {/* Typing subtitle — desktop */}
           <span
-            className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase mb-1 md:mb-3 hidden md:flex items-center gap-1"
+            className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase mb-1 md:mb-3 flex items-center gap-1"
             style={{ color: 'var(--secondary)', minHeight: '1.2em' }}
           >
             {role}
@@ -239,12 +258,6 @@ const HeroSection = () => {
           >
             Hinunia
           </h2>
-          {/* Typing subtitle — mobile */}
-          <span
-            className="text-xs font-bold tracking-[0.2em] uppercase mt-2 md:hidden flex items-center justify-center gap-1"
-            style={{ color: 'var(--secondary)', minHeight: '1.2em' }}
-          >
-            {role}
             <span
               className="inline-block w-[2px] h-[0.85em] ml-0.5 rounded-full"
               style={{ background: 'var(--accent)', animation: 'blink 1s step-end infinite' }}
