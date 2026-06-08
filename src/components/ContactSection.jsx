@@ -44,7 +44,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-32" style={{ background: 'var(--bg)' }}>
+    <section id="contact" className="py-16 md:py-32" style={{ background: 'var(--bg)' }}>
       <div className="section-container">
         <div className="grid md:grid-cols-2 gap-20 items-start">
 

@@ -42,11 +42,11 @@ const timeline = [
 const AboutSection = () => (
   <section
     id="about"
-    className="py-32"
+    className="py-16 md:py-32"
     style={{ background: 'var(--bg)' }}
   >
     <div className="section-container">
-      <div className="grid md:grid-cols-2 gap-20 items-start">
+      <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-start">
 
         {/* Left: heading + bio */}
         <motion.div

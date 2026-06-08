@@ -137,7 +137,7 @@ const CertCard = ({ cert, index }) => (
 );
 
 const CertificationsSection = () => (
-  <section id="certifications" className="py-24" style={{ background: 'var(--bg)' }}>
+  <section id="certifications" className="py-14 md:py-24" style={{ background: 'var(--bg)' }}>
     <div className="section-container">
       {/* Header */}
       <motion.div
