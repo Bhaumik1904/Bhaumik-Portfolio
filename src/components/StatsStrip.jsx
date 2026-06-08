@@ -14,15 +14,16 @@ const STATS = [
 const ITEMS = [...STATS, ...STATS];
 
 const StatsStrip = () => {
-  const [duration, setDuration] = useState(28);
+  // Lazy initial state — correct value on first render so Framer Motion
+  // never starts the infinite loop at the wrong speed.
+  const [duration, setDuration] = useState(() =>
+    typeof window !== 'undefined' && window.innerWidth < 768 ? 8 : 28
+  );
 
   useEffect(() => {
-    // On mobile screens the strip is narrower so the animation appears very slow.
-    // Use a proportionally shorter duration so items travel at a consistent speed.
     const update = () => {
-      setDuration(window.innerWidth < 768 ? 12 : 28);
+      setDuration(window.innerWidth < 768 ? 8 : 28);
     };
-    update();
     window.addEventListener('resize', update);
     return () => window.removeEventListener('resize', update);
   }, []);

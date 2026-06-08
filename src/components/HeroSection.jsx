@@ -176,7 +176,7 @@ const HeroSection = () => {
             Bhaumik
           </h2>
 
-          {/* Description + resume — desktop */}
+          {/* Description + resume — desktop only */}
           <div
             className="hero-anim hero-fade-up mt-6 md:mt-8 max-w-[280px] md:max-w-sm hidden md:block"
             style={{ animationDelay: '0.8s' }}
@@ -195,6 +195,25 @@ const HeroSection = () => {
                 Resume ↗
               </a>
             </MagneticButton>
+          </div>
+
+          {/* Description + resume — mobile only (in LEFT section so it's above avatar) */}
+          <div
+            className="hero-anim hero-fade-up mt-4 max-w-[260px] md:hidden flex flex-col items-center"
+            style={{ animationDelay: '0.8s' }}
+          >
+            <p className="text-sm font-medium leading-relaxed text-center" style={{ color: 'var(--secondary)' }}>
+              Building thoughtful digital products and AI-powered experiences.
+            </p>
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 mt-4 px-6 py-3 rounded-full text-sm font-semibold pointer-events-auto shadow-sm"
+              style={{ background: 'var(--text)', color: 'var(--bg)' }}
+            >
+              Resume ↗
+            </a>
           </div>
         </div>
 
@@ -231,25 +250,6 @@ const HeroSection = () => {
               style={{ background: 'var(--accent)', animation: 'blink 1s step-end infinite' }}
             />
           </span>
-
-          {/* Description + resume — mobile only */}
-          <div
-            className="hero-anim hero-fade-up mt-4 max-w-[280px] md:hidden block"
-            style={{ animationDelay: '0.8s' }}
-          >
-            <p className="text-sm font-medium leading-relaxed" style={{ color: 'var(--secondary)' }}>
-              Building thoughtful digital products and AI-powered experiences.
-            </p>
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 mt-4 px-6 py-3 rounded-full text-sm font-semibold transition-all pointer-events-auto shadow-sm"
-              style={{ background: 'var(--text)', color: 'var(--bg)' }}
-            >
-              Resume ↗
-            </a>
-          </div>
         </div>
       </div>
 

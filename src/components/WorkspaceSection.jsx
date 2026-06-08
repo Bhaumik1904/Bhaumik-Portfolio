@@ -185,10 +185,17 @@ const HINTS = {
 
 const WorkspaceSection = () => {
   const [hovered, setHovered] = useState(null);
-  const [isMobile, setIsMobile] = useState(false);
+  // Lazy initial state — so we NEVER attempt to render the 3D Canvas on mobile.
+  // The old useState(false) caused Canvas to mount on mobile before useEffect ran.
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' && (window.innerWidth < 768 || 'ontouchstart' in window)
+  );
 
   useEffect(() => {
-    setIsMobile(window.innerWidth < 768 || 'ontouchstart' in window);
+    const update = () =>
+      setIsMobile(window.innerWidth < 768 || 'ontouchstart' in window);
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
   }, []);
 
   return (
