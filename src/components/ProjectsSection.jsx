@@ -196,7 +196,7 @@ const ProjectsSection = () => {
   const [selectedProject, setSelectedProject] = useState(null);
 
   return (
-    <section id="work" className="py-16 md:py-32" style={{ background: 'var(--bg)' }}>
+    <section id="work" className="py-16 md:py-20" style={{ background: 'var(--bg)' }}>
       <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
       
       <div className="section-container">

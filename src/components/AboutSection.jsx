@@ -42,7 +42,7 @@ const timeline = [
 const AboutSection = () => (
   <section
     id="about"
-    className="py-16 md:py-32"
+    className="py-16 md:py-20"
     style={{ background: 'var(--bg)' }}
   >
     <div className="section-container">

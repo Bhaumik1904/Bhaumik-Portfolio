@@ -201,7 +201,7 @@ const WorkspaceSection = () => {
   return (
     <section
       id="resume"
-      className="py-16 md:py-32"
+      className="py-16 md:py-20"
       style={{ background: 'var(--bg)' }}
     >
       <div className="section-container">
