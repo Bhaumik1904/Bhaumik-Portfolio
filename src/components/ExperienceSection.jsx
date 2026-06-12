@@ -73,8 +73,9 @@ const ExperienceBlock = ({ exp, index }) => {
             isEven ? 'lg:order-1' : 'lg:order-2'
           }`}
         >
-          {/* Ghost number watermark */}
+          {/* Top: Type label + role title */}
           <div className="relative">
+            {/* Ghost number watermark */}
             <span
               className="absolute -top-6 -left-4 font-black leading-none select-none pointer-events-none"
               style={{
@@ -107,30 +108,30 @@ const ExperienceBlock = ({ exp, index }) => {
             </h3>
           </div>
 
-          {/* Company row */}
-          <div className="mt-6 flex items-center gap-4">
-            <div
-              className="w-12 h-12 rounded-2xl overflow-hidden flex items-center justify-center flex-shrink-0 bg-white"
-              style={{ border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}
-            >
-              <img
-                src={exp.logo}
-                alt={exp.company}
-                className="w-10 h-10 object-contain"
-                onError={e => {
-                  e.target.style.display = 'none';
-                  e.target.parentNode.innerHTML = `<span style="font-size:1.2rem;font-weight:800;color:${exp.accentColor}">${exp.id}</span>`;
-                }}
-              />
-            </div>
-            <div>
-              <p className="font-bold text-sm" style={{ color: 'var(--text)' }}>
-                {exp.company}
-              </p>
-              <p className="text-xs mt-0.5" style={{ color: 'var(--secondary)' }}>
-                {exp.period} · {exp.location}
-              </p>
-            </div>
+          {/* Middle: Full company logo — fills the empty space */}
+          <div className="flex items-center justify-center my-8 px-4">
+            <img
+              src={exp.logo}
+              alt={exp.company}
+              className="w-full object-contain"
+              style={{ maxHeight: '100px', maxWidth: '280px' }}
+              onError={e => {
+                e.target.style.display = 'none';
+                e.target.insertAdjacentHTML('afterend',
+                  `<span style="font-size:2rem;font-weight:900;color:${exp.accentColor};letter-spacing:-0.03em">${exp.company}</span>`
+                );
+              }}
+            />
+          </div>
+
+          {/* Bottom: period + location meta */}
+          <div>
+            <p className="text-sm font-semibold" style={{ color: 'var(--text)' }}>
+              {exp.company}
+            </p>
+            <p className="text-xs mt-0.5" style={{ color: 'var(--secondary)' }}>
+              {exp.period} · {exp.location}
+            </p>
           </div>
         </div>
 
