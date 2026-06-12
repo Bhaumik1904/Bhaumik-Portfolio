@@ -1,19 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <!-- Rounded square background -->
-  <rect width="32" height="32" rx="8" fill="#0071E3"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Dark rounded square — matches site's dark card tone -->
+  <rect width="32" height="32" rx="7" fill="#1D1D1F"/>
 
-  <!-- Letter B — clean, bold, white -->
+  <!-- <B/> in monospace — angle brackets in blue, B in white -->
   <text
     x="16"
-    y="23"
-    font-family="system-ui, -apple-system, 'SF Pro Display', 'Inter', sans-serif"
-    font-size="20"
-    font-weight="800"
-    fill="white"
+    y="22"
     text-anchor="middle"
-    letter-spacing="-0.5"
-  >B</text>
-
-  <!-- Blue accent dot after B -->
-  <circle cx="22.5" cy="21" r="2" fill="white" opacity="0.85"/>
+    font-family="'JetBrains Mono', 'Fira Code', 'Courier New', monospace"
+    font-size="13"
+    font-weight="700"
+  >
+    <tspan fill="#0071E3">&lt;</tspan><tspan fill="#FFFFFF">B</tspan><tspan fill="#0071E3">/&gt;</tspan>
+  </text>
 </svg>
