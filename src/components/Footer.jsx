@@ -18,7 +18,7 @@ const Footer = () => (
         </div>
 
         <p className="text-xs" style={{ color: 'var(--secondary)' }}>
-          Built with React · Three.js · Framer Motion · Tailwind
+          © 2026 Bhaumik Hinunia. All rights reserved.
         </p>
 
         <div className="flex items-center gap-5">
