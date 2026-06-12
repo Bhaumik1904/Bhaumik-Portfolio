@@ -201,7 +201,7 @@ const WorkspaceSection = () => {
   return (
     <section
       id="resume"
-      className="py-16 md:py-20"
+      className="py-10 md:py-14"
       style={{ background: 'var(--bg)' }}
     >
       <div className="section-container">
@@ -211,7 +211,7 @@ const WorkspaceSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-16"
+          className="mb-10"
         >
           <p className="section-label mb-3">Workspace</p>
           <h2

@@ -86,7 +86,7 @@ const GitHubStats = () => {
     : [];
 
   return (
-    <section className="py-12 overflow-hidden" style={{ background: 'var(--bg)' }}>
+    <section className="py-8 overflow-hidden" style={{ background: 'var(--bg)' }}>
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

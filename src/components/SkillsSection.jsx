@@ -101,7 +101,7 @@ const SkillsSection = () => {
   }, []);
 
   return (
-    <section className="relative w-full flex items-center overflow-hidden py-16 md:py-20" style={{ background: 'var(--bg)' }}>
+    <section className="relative w-full flex items-center overflow-hidden py-10 md:py-14" style={{ background: 'var(--bg)' }}>
       {/* Background: Cinematic Marquee — desktop only */}
       {!isMobile && <MarqueeBg />}
       

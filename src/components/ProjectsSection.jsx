@@ -196,7 +196,7 @@ const ProjectsSection = () => {
   const [selectedProject, setSelectedProject] = useState(null);
 
   return (
-    <section id="work" className="py-16 md:py-20" style={{ background: 'var(--bg)' }}>
+    <section id="work" className="py-10 md:py-14" style={{ background: 'var(--bg)' }}>
       <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
       
       <div className="section-container">
@@ -206,7 +206,7 @@ const ProjectsSection = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="mb-16"
+        className="mb-10"
       >
         <p className="section-label mb-3">Selected work</p>
         <h2
