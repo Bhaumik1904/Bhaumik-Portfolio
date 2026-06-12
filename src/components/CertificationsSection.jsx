@@ -39,7 +39,7 @@ const CertificationsSection = () => {
   const marqueeItems = [...CERTIFICATIONS, ...CERTIFICATIONS, ...CERTIFICATIONS];
 
   return (
-    <section id="certifications" className="py-20 md:py-32 overflow-hidden" style={{ background: 'var(--bg)' }}>
+    <section id="certifications" className="pt-8 pb-20 md:pt-10 md:pb-32 overflow-hidden" style={{ background: 'var(--bg)' }}>
       {/* Header */}
       <div className="max-w-6xl mx-auto px-6 lg:px-12 mb-12">
         <motion.div
