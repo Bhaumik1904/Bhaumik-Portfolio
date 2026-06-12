@@ -17,6 +17,7 @@ import GitHubStats from './components/GitHubStats';
 import CertificationsSection from './components/CertificationsSection';
 import ExperienceSection from './components/ExperienceSection';
 import DayInLifeSection from './components/DayInLifeSection';
+import BentoSection from './components/BentoSection';
 import Toast from './components/Toast';
 import StatsStrip from './components/StatsStrip';
 
@@ -75,7 +76,7 @@ function App() {
         <SkillsSection />
         <ProjectsSection />
         <ExperienceSection />
-        <DayInLifeSection />
+        <BentoSection />
         <AboutSection />
         <CertificationsSection />
         <ContactSection />
