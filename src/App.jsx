@@ -15,6 +15,7 @@ import CommandPalette from './components/CommandPalette';
 import ScrollProgressBar from './components/ScrollProgressBar';
 import GitHubStats from './components/GitHubStats';
 import CertificationsSection from './components/CertificationsSection';
+import ExperienceSection from './components/ExperienceSection';
 import Toast from './components/Toast';
 import StatsStrip from './components/StatsStrip';
 
@@ -72,6 +73,7 @@ function App() {
         <StatsStrip />
         <SkillsSection />
         <ProjectsSection />
+        <ExperienceSection />
         <WorkspaceSection />
         <AboutSection />
         <CertificationsSection />
