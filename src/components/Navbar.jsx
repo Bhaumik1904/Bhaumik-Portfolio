@@ -4,6 +4,7 @@ import MagneticButton from './MagneticButton';
 
 const navItems = [
   { label: 'Work', href: '#work' },
+  { label: 'Experience', href: '#experience' },
   { label: 'About', href: '#about' },
   { label: 'Resume', href: '/resume.pdf' },
   { label: 'Contact', href: '#contact' },

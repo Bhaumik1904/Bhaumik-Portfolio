@@ -6,7 +6,6 @@ import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import SkillsSection from './components/SkillsSection';
 import ProjectsSection from './components/ProjectsSection';
-import WorkspaceSection from './components/WorkspaceSection';
 import AboutSection from './components/AboutSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
@@ -16,8 +15,6 @@ import ScrollProgressBar from './components/ScrollProgressBar';
 import GitHubStats from './components/GitHubStats';
 import CertificationsSection from './components/CertificationsSection';
 import ExperienceSection from './components/ExperienceSection';
-import DayInLifeSection from './components/DayInLifeSection';
-import BentoSection from './components/BentoSection';
 import Toast from './components/Toast';
 import StatsStrip from './components/StatsStrip';
 
@@ -76,7 +73,6 @@ function App() {
         <SkillsSection />
         <ProjectsSection />
         <ExperienceSection />
-        <BentoSection />
         <AboutSection />
         <CertificationsSection />
         <ContactSection />
