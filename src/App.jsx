@@ -16,6 +16,7 @@ import ScrollProgressBar from './components/ScrollProgressBar';
 import GitHubStats from './components/GitHubStats';
 import CertificationsSection from './components/CertificationsSection';
 import ExperienceSection from './components/ExperienceSection';
+import DayInLifeSection from './components/DayInLifeSection';
 import Toast from './components/Toast';
 import StatsStrip from './components/StatsStrip';
 
@@ -74,7 +75,7 @@ function App() {
         <SkillsSection />
         <ProjectsSection />
         <ExperienceSection />
-        <WorkspaceSection />
+        <DayInLifeSection />
         <AboutSection />
         <CertificationsSection />
         <ContactSection />
