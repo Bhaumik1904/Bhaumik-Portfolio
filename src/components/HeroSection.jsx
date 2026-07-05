@@ -173,12 +173,12 @@ const HeroSection = () => {
 
       {/* ── Avatar ── */}
       <motion.div
-        style={{ y: yAvatar, opacity, mixBlendMode: 'multiply' }}
+        style={{ y: yAvatar, opacity }}
         className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-center pointer-events-none"
       >
         <div
           className="hero-anim hero-slide-up w-full flex items-start justify-center h-[42vh] md:h-[85vh] overflow-hidden"
-          style={{ animationDelay: '0.2s' }}
+          style={{ animationDelay: '0.2s', background: 'transparent' }}
         >
           <motion.div
             style={{ x: isMobile ? 0 : mouseX, y: isMobile ? 0 : mouseY }}
@@ -194,6 +194,7 @@ const HeroSection = () => {
                 objectFit: 'cover',
                 objectPosition: 'top center',
                 filter: 'brightness(1.08) contrast(1.05)',
+                mixBlendMode: 'multiply',
               }}
             />
           </motion.div>
