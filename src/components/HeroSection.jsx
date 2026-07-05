@@ -193,7 +193,7 @@ const HeroSection = () => {
                 width: 'auto',
                 objectFit: 'cover',
                 objectPosition: 'top center',
-                filter: 'brightness(1.02) contrast(1.05)',
+                filter: 'brightness(1.08) contrast(1.05)',
               }}
             />
           </motion.div>
