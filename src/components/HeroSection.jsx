@@ -178,7 +178,7 @@ const HeroSection = () => {
       >
         <div
           className="hero-anim hero-slide-up w-full flex items-start justify-center h-[42vh] md:h-[85vh] overflow-hidden"
-          style={{ animationDelay: '0.2s', background: 'transparent' }}
+          style={{ animationDelay: '0.2s' }}
         >
           <motion.div
             style={{ x: isMobile ? 0 : mouseX, y: isMobile ? 0 : mouseY }}
@@ -193,8 +193,7 @@ const HeroSection = () => {
                 width: 'auto',
                 objectFit: 'cover',
                 objectPosition: 'top center',
-                filter: 'brightness(1.08) contrast(1.05)',
-                mixBlendMode: 'multiply',
+                filter: 'brightness(1.02) contrast(1.05)',
               }}
             />
           </motion.div>
