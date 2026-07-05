@@ -4,6 +4,24 @@ import { motion, AnimatePresence } from 'framer-motion';
 const CERTIFICATIONS = [
   {
     id: 1,
+    title: 'Data Scientist Associate',
+    issuer: 'DataCamp',
+    date: '2025',
+    description: 'Certified as a Data Scientist Associate by DataCamp, demonstrating proficiency in data analysis, statistical modeling, machine learning, and data wrangling using Python. Validated through rigorous skill assessments and a practical exam.',
+    link: 'https://www.datacamp.com/certificate/DSA0017798379944',
+    image: '/Data Scientist Associate.png',
+  },
+  {
+    id: 2,
+    title: 'MongoDB Associate Developer',
+    issuer: 'MongoDB · Credly',
+    date: '2026',
+    description: 'Certified expertise in MongoDB, covering document database modeling, complex data aggregations, indexing strategies, and building scalable backend applications using NoSQL architecture.',
+    link: 'https://www.credly.com/badges/fc861de6-29f9-4cd0-ae9a-f23416e97ee9/public_url',
+    image: '/MongoDB Associate Developer.png',
+  },
+  {
+    id: 3,
     title: 'Frontend Developer',
     issuer: 'HackerRank',
     date: '2026',
@@ -12,22 +30,13 @@ const CERTIFICATIONS = [
     image: '/Hackerrank Frontend Developer.jpg',
   },
   {
-    id: 2,
+    id: 4,
     title: 'Software Engineer',
     issuer: 'HackerRank',
     date: '2026',
     description: 'Validated strong core computer science fundamentals, algorithm design, data structures, and problem-solving skills necessary for building robust and scalable software solutions.',
     link: 'https://www.hackerrank.com/certificates/f51f6e9d9664',
     image: '/Hackerrank Software Engineer.jpg',
-  },
-  {
-    id: 3,
-    title: 'MongoDB Associate Developer',
-    issuer: 'MongoDB · Credly',
-    date: '2026',
-    description: 'Certified expertise in MongoDB, covering document database modeling, complex data aggregations, indexing strategies, and building scalable backend applications using NoSQL architecture.',
-    link: 'https://www.credly.com/badges/fc861de6-29f9-4cd0-ae9a-f23416e97ee9/public_url',
-    image: '/MongoDB Associate Developer.png',
   },
 ];
 
