@@ -57,7 +57,7 @@ const projects = [
     bgLight: '#FFF8EE',
     emoji: '🏷️',
     github: 'https://github.com/Bhaumik1904/BidSphere-Auction-Application.git',
-    demo: '#',
+    demo: 'https://bid-sphere-auction-application.vercel.app/',
   },
 ];
 
