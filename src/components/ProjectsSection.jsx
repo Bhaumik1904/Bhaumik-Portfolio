@@ -15,7 +15,7 @@ const projects = [
     bgLight: '#EEF4FF',
     emoji: '🤖',
     github: 'https://github.com/Bhaumik1904/Aptiva-AI.git',
-    demo: '#',
+    demo: 'https://aptiva-ai.streamlit.app/',
   },
   {
     id: '02',
